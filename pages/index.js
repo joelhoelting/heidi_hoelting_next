@@ -1,18 +1,20 @@
 import Layout from '../layouts/primary';
 import styled from 'styled-components';
 
-import Bullets from '../components/bullets';
+import CoverImage from '../components/CoverImage';
+import Bullets from '../components/Bullets';
+
+import homeCarouselData from '../data/homeCarouselData';
 
 class Index extends React.Component {
   constructor (props) {
     super(props);
     
     this.state = {
-      initialLoad: false,
-      activeImage: 0
+      initialLoad: false
     };
 
-    this.imageCount = 4;
+    this.imageCount = homeCarouselData.length - 1;
     this.initialImage = React.createRef();
   }
 
@@ -40,42 +42,49 @@ class Index extends React.Component {
   
   handleInitialLoad() {  
     if (!this.state.initialLoad) {
+      this.setState({ initialLoad: true, activeImage: 0});
       setTimeout(() => {
-        this.setState({ initialLoad: true, activeImage: 1});
+        this.setState({ activeImage: 1});
         this.startImageRotation();
-      }, 3000);
+      }, 4000);
     }
   }
 
-  render () {    
+  generateCarousel() {
+    return homeCarouselData.map((image, index) => {
+      if (index === 0) {
+        return (
+          <CoverImage
+            key={`cover-image-${index}`} 
+            active={this.state.activeImage === index} 
+            src={image.src}
+            ref={this.initialImage}
+            onLoad={this.handleInitialLoad.bind(this)} 
+          />
+        );
+      } else {
+        return (
+          <CoverImage 
+            key={`cover-image-${index}`} 
+            active={this.state.activeImage === index}
+            src={image.src}
+          />
+        );
+      }
+    });
+  }
+
+  render () {
     return (
       <Layout>
-        <CoverImage 
-          active={this.state.activeImage === 4}
-          src='/static/images/pages/home/home_background_4_2400.jpg' 
-        />
-        <CoverImage 
-          active={this.state.activeImage === 3}
-          src='/static/images/pages/home/home_background_3_2400.jpg' 
-        />
-        <CoverImage 
-          active={this.state.activeImage === 2}
-          src='/static/images/pages/home/home_background_2_2400.jpg' 
-        />
-        <CoverImage 
-          active={this.state.activeImage === 1}
-          src='/static/images/pages/home/home_background_1_2400.jpg' 
-        />
-        <CoverImage 
-          active={this.state.activeImage === 0} 
-          src='/static/images/pages/home/home_background_0_initial_2400.jpg'
-          ref={this.initialImage}
-          onLoad={this.handleInitialLoad.bind(this)} 
-        />
-        {/* <div>
+        {this.generateCarousel()}
+        {/* <Caption active={this.state.activeImage !== 0}>
+          {homeCarouselData[this.state.activeImage] ? homeCarouselData[this.state.activeImage].caption : null}
+        </Caption> */}
+        <IntroDiv active={this.state.activeImage === 0}>
           <h1 style={{ marginBottom: 0 }}>Heidi Hölting</h1>
-          <p style={{ marginTop: 0 }}>Model</p>
-        </div> */}
+          <p style={{ marginTop: 0, textAlign: 'center' }}>Model</p>
+        </IntroDiv>
         <Bullets 
           imageCount={this.imageCount} 
           active={this.state.activeImage !== 0}
@@ -89,15 +98,23 @@ class Index extends React.Component {
 
 export default Index;
 
-const CoverImage = styled.img`
-  display: block;
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
+const IntroDiv = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
-  transition: opacity 500ms ease;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  fontSize: 2rem;
+  textAlign: center;
+  visibility: ${props => props.active ? 'visible' : 'hidden'};
   opacity: ${props => props.active ? 1 : 0};
+  transition: ${props => props.active ? 'all 1000ms ease 200ms' : 'all 500ms ease'};
 `;
 
+// const Caption = styled.p`
+//   position: absolute;
+//   bottom: 0px;
+//   left: 20px;
+//   color: #000;
+//   font-weight: bold;
+//   visibility: ${props => props.active ? 'visible' : 'hidden'};
+// `;
