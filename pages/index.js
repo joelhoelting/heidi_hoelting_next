@@ -9,7 +9,7 @@ class Index extends React.Component {
     
     this.state = {
       initialLoad: false,
-      activeImage: 1
+      activeImage: 0
     };
 
     this.imageCount = 4;
