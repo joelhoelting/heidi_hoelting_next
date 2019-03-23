@@ -109,12 +109,3 @@ const IntroDiv = styled.div`
   opacity: ${props => props.active ? 1 : 0};
   transition: ${props => props.active ? 'all 1000ms ease 200ms' : 'all 500ms ease'};
 `;
-
-// const Caption = styled.p`
-//   position: absolute;
-//   bottom: 0px;
-//   left: 20px;
-//   color: #000;
-//   font-weight: bold;
-//   visibility: ${props => props.active ? 'visible' : 'hidden'};
-// `;

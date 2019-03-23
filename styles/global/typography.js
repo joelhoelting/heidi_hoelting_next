@@ -1,5 +1,6 @@
+import { createGlobalStyle } from 'styled-components';
 
-const typography = {
+const TypographyStyle = createGlobalStyle`
   'html, body': {
     fontSize: '100%',
     '-webkit-font-smoothing': 'antialiased',
@@ -8,7 +9,7 @@ const typography = {
   },
   // Header Text
   'h1, h2, h3, h4, h5, h6': {
-    fontFamily: 'Baskerville',
+    fontfamily: "'Merriweather Sans', sans-serif",
     fontWeight: 'bold'
   },
   'a': {
@@ -23,6 +24,6 @@ const typography = {
   'a:active': {
     color: 'inherit'
   }
-};
+`;
 
-export default typography;
+export default TypographyStyle;

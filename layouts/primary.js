@@ -1,22 +1,15 @@
+import Head from 'next/head';
 import Header from '../includes/header';
-import { createGlobalStyle } from 'styled-components';
 
-const GlobalStyle = createGlobalStyle`
-  * {
-    box-sizing: border-box;
-  }
-  html, body {
-    width: 100%;
-    height: 100%;
-  }
-  body {
-    margin: 0;
-    padding: 0;
-  }
-`;
+import GlobalStyle from '~/styles/global';
+import TypographyStyle from '../styles/global/typography';
 
-const Layout = ({ children }) => (
+const Layout = ({ children, title }) => (
   <React.Fragment>
+    <Head>
+      <title>Heidi Hölting {title && `- ${title}`}</title>
+    </Head>
+    <TypographyStyle />
     <GlobalStyle />
     <Header />
     {children}

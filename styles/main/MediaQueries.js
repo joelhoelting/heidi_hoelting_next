@@ -1,21 +1,33 @@
-export const globalMediaQueries = {
-  phone: '(min-width: 375px)',
-  phoneLarge: '(min-width: 414px)',  
-  tablet: '(min-width: 768px)',
-  tabletLandscape: '(min-width: 992px)',
-  desktopSmall: '(min-width: 1200px)',
-  desktop: '(min-width: 1440px)',
-  desktopLarge: '(min-width: 1920px)',
-  desktopXLarge: '(min-width: 2048px)'
+import { css } from 'styled-components';
+
+const sizes = {
+  phone: 375,
+  phoneLarge: 414,
+  tablet: 768,
+  tabletLandscape: 992,
+  desktopSmall: 1200,
+  desktop: 1440,
+  desktopLarge: 1920,
+  desktopXLarge: 2048
 };
 
-export const mediaQueries = {
-  phone: '@media screen and (min-width: 375px)',
-  phoneLarge: '@media screen and (min-width: 414px)',
-  tablet: '@media screen and (min-width: 768px)',
-  tabletLandscape: '@media screen and (min-width: 992px)',
-  desktopSmall: '@media screen and (min-width: 1200px)',
-  desktop: '@media screen and (min-width: 1440px)',
-  desktopLarge: '@media screen and (min-width: 1920px)',
-  desktopXLarge: '@media screen and (min-width: 2048px)'
-};
+// Iterate through the sizes and create a media template
+export const mediaMin = Object.keys(sizes).reduce((acc, label) => {
+  acc[label] = (...args) => css`
+    @media (min-width: ${sizes[label] / 16}em) {
+      ${css(...args)}
+    }
+  `;
+
+  return acc;
+}, {});
+
+export const mediaMax = Object.keys(sizes).reduce((acc, label) => {
+  acc[label] = (...args) => css`
+    @media (max-width: ${sizes[label] / 16}em) {
+      ${css(...args)}
+    }
+  `;
+
+  return acc;
+}, {});
