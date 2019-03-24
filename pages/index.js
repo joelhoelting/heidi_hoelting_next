@@ -1,4 +1,3 @@
-import Layout from '../layouts/primary';
 import styled from 'styled-components';
 
 import CoverImage from '../components/CoverImage';
@@ -78,7 +77,7 @@ class Index extends React.Component {
 
   render () {
     return (
-      <Layout>
+      <React.Fragment>
         {this.generateCarousel()}
         <IntroDiv active={this.state.activeImage === 0}>
           <h1>Heidi  Hölting</h1>
@@ -90,7 +89,7 @@ class Index extends React.Component {
           activeImage={this.state.activeImage}
           stopImageRotation={this.stopImageRotation.bind(this)}
         />
-      </Layout>
+      </React.Fragment>
     );
   }
 }

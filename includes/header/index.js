@@ -21,7 +21,7 @@ class Header extends React.Component {
       <HeaderWrapper>
         <h1 key='index'>
           <Link href='/'>
-            Heidi Hölting
+            <a>Heidi Hölting</a> 
           </Link>
         </h1>
         <MobileNavigation 
