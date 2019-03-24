@@ -6,13 +6,14 @@ import Bullets from '../components/Bullets';
 
 import homeCarouselData from '../data/homeCarouselData';
 
+import { mediaMin } from '~/styles/mediaQueries';
+
 class Index extends React.Component {
   constructor (props) {
     super(props);
     
     this.state = {
-      initialLoad: false,
-      activeImage: 1
+      initialLoad: false
     };
 
     this.imageCount = homeCarouselData.length - 1;
@@ -34,22 +35,22 @@ class Index extends React.Component {
     this.setState({ activeImage });
   }
 
-  // componentDidMount() {
-  //   const img = this.initialImage.current;
-  //   if (img && img.complete) {
-  //     this.handleInitialLoad();
-  //   }
-  // } 
+  componentDidMount() {
+    const img = this.initialImage.current;
+    if (img && img.complete) {
+      this.handleInitialLoad();
+    }
+  } 
   
-  // handleInitialLoad() {  
-  //   if (!this.state.initialLoad) {
-  //     this.setState({ initialLoad: true, activeImage: 0});
-  //     setTimeout(() => {
-  //       this.setState({ activeImage: 1});
-  //       this.startImageRotation();
-  //     }, 4000);
-  //   }
-  // }
+  handleInitialLoad() {  
+    if (!this.state.initialLoad) {
+      this.setState({ initialLoad: true, activeImage: 0});
+      // setTimeout(() => {
+      //   this.setState({ activeImage: 1});
+      //   this.startImageRotation();
+      // }, 4000);
+    }
+  }
 
   generateCarousel() {
     return homeCarouselData.map((image, index) => {
@@ -80,8 +81,8 @@ class Index extends React.Component {
       <Layout>
         {this.generateCarousel()}
         <IntroDiv active={this.state.activeImage === 0}>
-          <h1>Heidi Hölting</h1>
-          <p>Model</p>
+          <h1>Heidi  Hölting</h1>
+          <h6>Model</h6>
         </IntroDiv>
         <Bullets 
           imageCount={this.imageCount} 
@@ -99,20 +100,23 @@ export default Index;
 const IntroDiv = styled.div`
   position: absolute;
   bottom: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  fontSize: 2rem;
-  textAlign: center;
+  text-align: center;
   visibility: ${props => props.active ? 'visible' : 'hidden'};
   opacity: ${props => props.active ? 1 : 0};
   transition: ${props => props.active ? 'all 1000ms ease 200ms' : 'all 500ms ease'};
+  width: 100%;
   h1 {
     margin-bottom: 0;
-    font-size: 4rem;
+    font-size: 2.5rem;
+    ${mediaMin.desktopSmall`
+      font-size: 4rem;
+    `}
   }
-  p {
-    margin-top: 0;
-    text-align: center;
-    font-size: 2rem;
+  h6 {
+    margin: 0;
+    font-size: 1.8rem;
+    ${mediaMin.desktopSmall`
+      font-size: 2rem;
+    `}
   }
 `;

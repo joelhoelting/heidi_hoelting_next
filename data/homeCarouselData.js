@@ -1,6 +1,6 @@
 const carouselObj = [
   {
-    src: '/static/images/pages/home/home_background_0_initial_2400.jpg',
+    src: '/static/images/pages/home/home_background_1_overlay_v3.jpg',
     caption: 'Maria La Gorda, Cuba'
   },
   {

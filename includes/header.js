@@ -41,10 +41,11 @@ const HeaderWrapper = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: bold;
+  font-family: 'Alegreya', serif;
   h1 {
     margin: 0 40px;
     cursor: pointer;
+    font-weight: normal;
   }
   ul {
     padding: 0;
@@ -53,8 +54,9 @@ const HeaderWrapper = styled.header`
     list-style-type: none;
     li {
       margin: 0 40px;
-      font-size: 20px;
+      font-size: 24px;
       cursor: pointer;
+      letter-spacing: 2px;
     }
   }
 `;

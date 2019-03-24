@@ -9,20 +9,27 @@ const TypographyStyle = createGlobalStyle`
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-weight: bold;
+    font-family: 'Alegreya', serif;
+    font-weight: normal;
+    letter-spacing: 2px;
+  }
+
+  p {
+    font-family: 'Philosopher', serif;
+    letter-spacing: 1px;
   }
 
   a {
     text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  a:visited {
-    color: inherit;
-  }
-  a:active {
-    color: inherit;
+    &:hover {
+      text-decoration: underline;
+    }
+    &:visited {
+      color: inherit;
+    }
+    &:active {
+      color: inherit;
+    }
   }
 `;
 
