@@ -45,10 +45,10 @@ class Index extends React.Component {
   handleInitialLoad() {  
     if (!this.state.initialLoad) {
       this.setState({ initialLoad: true, activeImage: 0});
-      // setTimeout(() => {
-      //   this.setState({ activeImage: 1});
-      //   this.startImageRotation();
-      // }, 4000);
+      setTimeout(() => {
+        this.setState({ activeImage: 1});
+        this.startImageRotation();
+      }, 4000);
     }
   }
 
@@ -61,7 +61,7 @@ class Index extends React.Component {
             active={this.state.activeImage === index} 
             src={image.src}
             ref={this.initialImage}
-            // onLoad={this.handleInitialLoad.bind(this)} 
+            onLoad={this.handleInitialLoad.bind(this)} 
           />
         );
       } else {
