@@ -1,58 +1,60 @@
 import React from 'react';
 import Link from 'next/link';
 
-const Header = () => {
-  const HeaderInline = {
-    main: {
-      position: 'fixed',
-      left: 0,
-      top: 0,
-      width: '100%',
-      zIndex: 1,
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      fontFamily: 'baskerville',
-      fontWeight: 'bold',
-      heading: {
-        margin: '0 40px',
-        cursor: 'pointer'
-      },
-      list: {
-        padding: 0,
-        display: 'flex',
-        justifyContent: 'center',
-        listStyleType: 'none',
-        listItem: {
-          margin: '0 40px',
-          fontSize: '20px',
-          cursor: 'pointer',
-        }
-      }
-    }
-  };
-  
-  const { main } = HeaderInline;
-  const { listItem } = main.list;
+import styled from 'styled-components';
 
-  return (
-    <header style={main}>
+const Header = () => (
+  <HeaderWrapper>
+    <h1 key='index'>
       <Link href='/'>
-        <h1 key='index' style={main.heading}>Heidi Hölting</h1>
+        Heidi Hölting
       </Link>
-      <ul style={main.list}>
+    </h1>
+    <ul>
+      <li key='gallery'>
         <Link href='/gallery'>
-          <li key='gallery' style={listItem}>Gallery</li>
+          <a>Gallery</a>
         </Link>
+      </li>
+      <li key='about'>
         <Link href='/about'>
-          <li key='about' style={listItem}>About</li>
+          <a>About</a>
         </Link>
+      </li>
+      <li key='contact'>
         <Link href='/contact'>
-          <li key='contact' style={listItem}>Contact</li>
+          <a>Contact</a>
         </Link>
-      </ul>
-    </header>
-  );
-};
+      </li>
+    </ul>
+  </HeaderWrapper>
+);
 
 export default Header;
+
+const HeaderWrapper = styled.header`
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  h1 {
+    margin: 0 40px;
+    cursor: pointer;
+  }
+  ul {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    li {
+      margin: 0 40px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
+`;

@@ -1,8 +1,7 @@
 import Head from 'next/head';
 import Header from '../includes/header';
 
-import GlobalStyle from '~/styles/global';
-import TypographyStyle from '../styles/global/typography';
+import { GlobalStyle, TypographyStyle } from '~/styles/global/_module';
 
 const Layout = ({ children, title }) => (
   <React.Fragment>
