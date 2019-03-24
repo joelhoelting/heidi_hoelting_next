@@ -11,7 +11,8 @@ class Index extends React.Component {
     super(props);
     
     this.state = {
-      initialLoad: false
+      initialLoad: false,
+      activeImage: 1
     };
 
     this.imageCount = homeCarouselData.length - 1;
@@ -33,22 +34,22 @@ class Index extends React.Component {
     this.setState({ activeImage });
   }
 
-  componentDidMount() {
-    const img = this.initialImage.current;
-    if (img && img.complete) {
-      this.handleInitialLoad();
-    }
-  } 
+  // componentDidMount() {
+  //   const img = this.initialImage.current;
+  //   if (img && img.complete) {
+  //     this.handleInitialLoad();
+  //   }
+  // } 
   
-  handleInitialLoad() {  
-    if (!this.state.initialLoad) {
-      this.setState({ initialLoad: true, activeImage: 0});
-      setTimeout(() => {
-        this.setState({ activeImage: 1});
-        this.startImageRotation();
-      }, 4000);
-    }
-  }
+  // handleInitialLoad() {  
+  //   if (!this.state.initialLoad) {
+  //     this.setState({ initialLoad: true, activeImage: 0});
+  //     setTimeout(() => {
+  //       this.setState({ activeImage: 1});
+  //       this.startImageRotation();
+  //     }, 4000);
+  //   }
+  // }
 
   generateCarousel() {
     return homeCarouselData.map((image, index) => {
@@ -59,7 +60,7 @@ class Index extends React.Component {
             active={this.state.activeImage === index} 
             src={image.src}
             ref={this.initialImage}
-            onLoad={this.handleInitialLoad.bind(this)} 
+            // onLoad={this.handleInitialLoad.bind(this)} 
           />
         );
       } else {
@@ -78,12 +79,9 @@ class Index extends React.Component {
     return (
       <Layout>
         {this.generateCarousel()}
-        {/* <Caption active={this.state.activeImage !== 0}>
-          {homeCarouselData[this.state.activeImage] ? homeCarouselData[this.state.activeImage].caption : null}
-        </Caption> */}
         <IntroDiv active={this.state.activeImage === 0}>
-          <h1 style={{ marginBottom: 0 }}>Heidi Hölting</h1>
-          <p style={{ marginTop: 0, textAlign: 'center' }}>Model</p>
+          <h1>Heidi Hölting</h1>
+          <p>Model</p>
         </IntroDiv>
         <Bullets 
           imageCount={this.imageCount} 
@@ -108,4 +106,13 @@ const IntroDiv = styled.div`
   visibility: ${props => props.active ? 'visible' : 'hidden'};
   opacity: ${props => props.active ? 1 : 0};
   transition: ${props => props.active ? 'all 1000ms ease 200ms' : 'all 500ms ease'};
+  h1 {
+    margin-bottom: 0;
+    font-size: 4rem;
+  }
+  p {
+    margin-top: 0;
+    text-align: center;
+    font-size: 2rem;
+  }
 `;
