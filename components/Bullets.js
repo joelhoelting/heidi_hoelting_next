@@ -33,7 +33,7 @@ const BulletDiv = styled.div`
   transform: translateX(50%);
   visibility: ${props => props.active ? 'visible' : 'hidden'};
   
-  ${mediaMin.desktopSmall`
+  ${mediaMin.tabletLandscape`
     flex-direction: column;
     right: 20px;
     top: 50%;
@@ -52,7 +52,7 @@ const Bullet = styled.button`
   width: 15px;
   transition: background 300ms ease;
   
-  ${mediaMin.desktopSmall`
+  ${mediaMin.tabletLandscape`
     margin: 10px 0;
     &:hover {
       background: #000

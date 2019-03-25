@@ -31,7 +31,7 @@ const PlayPauseContainer = styled.div`
   &:hover {
     background: rgba(0,0,0,.3);
   }
-  ${mediaMax.desktopSmall`
+  ${mediaMax.tabletLandscape`
     display: none;
   `}
 

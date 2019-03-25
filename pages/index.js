@@ -25,8 +25,15 @@ class Index extends React.Component {
     if (img && img.complete) {
       this.handleInitialLoad();
     }
-  } 
+  }
 
+  componentWillUnmount() {
+    if (this.imageInterval) {
+      this.stopImageRotation();
+    } else {
+      null;
+    }
+  }
 
   handleInitialLoad() {  
     if (!this.state.initialLoad) {
@@ -43,21 +50,21 @@ class Index extends React.Component {
   toggleSlideShow() {
     if (this.state.slideShowActive) {
       this.stopImageRotation(this.state.activeImage);
-      this.setState({ slideShowActive: false });
     } else {
       this.startImageRotation();
-      this.setState({ slideShowActive: true });
     }
   }
 
   startImageRotation() {
     this.setState({ slideShowActive: true });
     this.imageInterval = setInterval(() => this.changeImage(), 4000);
+    console.log('started', this.imageInterval);
   }
 
   stopImageRotation(index) {
     this.setState({ activeImage: index, slideShowActive: false});
     clearInterval(this.imageInterval);
+    console.log('stopped', this.imageInterval);
   }
 
   changeImage() {
