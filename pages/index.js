@@ -1,12 +1,9 @@
-import styled from 'styled-components';
-
 import CoverImage from '~/components/CoverImage';
 import Bullets from '~/components/Bullets';
 import PlayPause from '~/components/PlayPause';
+import IntroDiv from '~/components/IntroDiv';
 
 import homeCarouselData from '~/data/homeCarouselData';
-
-import { mediaMin } from '~/styles/mediaQueries';
 
 class Index extends React.Component {
   constructor (props) {
@@ -41,8 +38,7 @@ class Index extends React.Component {
         this.setState({ initialLoad: true, activeImage: 0});
       }, 300);
       setTimeout(() => {
-        this.setState({ activeImage: 1});
-        this.startImageRotation();
+        this.startImageRotation(1);
       }, 4000);
     }
   }
@@ -55,16 +51,22 @@ class Index extends React.Component {
     }
   }
 
-  startImageRotation() {
-    this.setState({ slideShowActive: true });
-    this.imageInterval = setInterval(() => this.changeImage(), 4000);
-    console.log('started', this.imageInterval);
+  startImageRotation(activeImage = false) {
+    if (!this.state.slideShowActive) {
+      let newState;
+      if (activeImage) {
+        newState = { slideShowActive: true, activeImage };
+      } else {
+        newState = { slideShowActive: true };
+      }
+      this.setState(newState);
+      this.imageInterval = setInterval(() => this.changeImage(), 4000);
+    }
   }
 
   stopImageRotation(index) {
     this.setState({ activeImage: index, slideShowActive: false});
     clearInterval(this.imageInterval);
-    console.log('stopped', this.imageInterval);
   }
 
   changeImage() {
@@ -126,10 +128,7 @@ class Index extends React.Component {
     return (
       <React.Fragment>
         {this.generateCarousel()}
-        <IntroDiv active={this.state.activeImage === 0}>
-          <h1>Heidi  Hölting</h1>
-          <h6>Model</h6>
-        </IntroDiv>
+        <IntroDiv active={this.state.activeImage === 0} />
         {this.renderBullets()}
         {this.renderPlayPause()}
       </React.Fragment>
@@ -139,26 +138,3 @@ class Index extends React.Component {
 
 export default Index;
 
-const IntroDiv = styled.div`
-  position: absolute;
-  bottom: 10%;
-  text-align: center;
-  visibility: ${props => props.active ? 'visible' : 'hidden'};
-  opacity: ${props => props.active ? 1 : 0};
-  transition: ${props => props.active ? 'all 1000ms ease 200ms' : 'all 500ms ease'};
-  width: 100%;
-  h1 {
-    margin-bottom: 0;
-    font-size: 2.5rem;
-    ${mediaMin.desktopSmall`
-      font-size: 4rem;
-    `}
-  }
-  h6 {
-    margin: 0;
-    font-size: 1.8rem;
-    ${mediaMin.desktopSmall`
-      font-size: 2rem;
-    `}
-  }
-`;
