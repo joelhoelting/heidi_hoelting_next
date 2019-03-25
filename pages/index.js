@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
-import CoverImage from '../components/CoverImage';
-import Bullets from '../components/Bullets';
+import CoverImage from '~/components/CoverImage';
+import Bullets from '~/components/Bullets';
+import PlayPause from '~/components/PlayPause';
 
-import homeCarouselData from '../data/homeCarouselData';
+import homeCarouselData from '~/data/homeCarouselData';
 
 import { mediaMin } from '~/styles/mediaQueries';
 
@@ -19,28 +20,14 @@ class Index extends React.Component {
     this.initialImage = React.createRef();
   }
 
-  startImageRotation() {
-    this.imageInterval = setInterval(() => this.changeImage(), 7000);
-  }
-
-  stopImageRotation(index) {
-    this.setState({ activeImage: index});
-    clearInterval(this.imageInterval);
-  }
-
-  changeImage() {
-    let activeImage;
-    this.state.activeImage === this.imageCount ? activeImage = 1 : activeImage = this.state.activeImage + 1;
-    this.setState({ activeImage });
-  }
-
   componentDidMount() {
     const img = this.initialImage.current;
     if (img && img.complete) {
       this.handleInitialLoad();
     }
   } 
-  
+
+
   handleInitialLoad() {  
     if (!this.state.initialLoad) {
       this.setState({ initialLoad: true, activeImage: 0});
@@ -49,6 +36,32 @@ class Index extends React.Component {
         this.startImageRotation();
       }, 4000);
     }
+  }
+
+  toggleSlideShow() {
+    if (this.state.slideShowActive) {
+      this.stopImageRotation(this.state.activeImage);
+      this.setState({ slideShowActive: false });
+    } else {
+      this.startImageRotation();
+      this.setState({ slideShowActive: true });
+    }
+  }
+
+  startImageRotation() {
+    this.setState({ slideShowActive: true });
+    this.imageInterval = setInterval(() => this.changeImage(), 4000);
+  }
+
+  stopImageRotation(index) {
+    this.setState({ activeImage: index, slideShowActive: false});
+    clearInterval(this.imageInterval);
+  }
+
+  changeImage() {
+    let activeImage;
+    this.state.activeImage === this.imageCount ? activeImage = 1 : activeImage = this.state.activeImage + 1;
+    this.setState({ activeImage });
   }
 
   generateCarousel() {
@@ -75,6 +88,31 @@ class Index extends React.Component {
     });
   }
 
+  renderBullets() {
+    if (this.state.initialLoad) {
+      return (
+        <Bullets 
+          imageCount={this.imageCount} 
+          active={this.state.activeImage !== 0}
+          activeImage={this.state.activeImage}
+          stopImageRotation={this.stopImageRotation.bind(this)}
+        />
+      );
+    }
+  }
+
+  renderPlayPause() {
+    if (this.state.initialLoad) {
+      return (
+        <PlayPause
+          slideShowActive={this.state.slideShowActive}
+          slideShowInitialized={this.state.activeImage !== 0}
+          toggleSlideShow={() => this.toggleSlideShow() } 
+        />
+      );
+    }
+  }
+
   render () {
     return (
       <React.Fragment>
@@ -83,12 +121,8 @@ class Index extends React.Component {
           <h1>Heidi  Hölting</h1>
           <h6>Model</h6>
         </IntroDiv>
-        <Bullets 
-          imageCount={this.imageCount} 
-          active={this.state.activeImage !== 0}
-          activeImage={this.state.activeImage}
-          stopImageRotation={this.stopImageRotation.bind(this)}
-        />
+        {this.renderBullets()}
+        {this.renderPlayPause()}
       </React.Fragment>
     );
   }

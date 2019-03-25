@@ -1,14 +1,20 @@
 import Head from 'next/head';
 import Header from '../includes/header';
+import { withRouter } from 'next/router';
 
-const Layout = ({ children, title }) => (
-  <React.Fragment>
-    <Head>
-      <title>Heidi Hölting {title && `- ${title}`}</title>
-    </Head>
-    <Header />
-    {children}
-  </React.Fragment>
-);
+const Layout = props => {
+  const title = props.router.pathname.replace('/', '');
+  const capitalizedTitle = title.charAt(0).toUpperCase() + title.slice(1);
 
-export default Layout;
+  return (
+    <React.Fragment>
+      <Head>
+        <title>Heidi Hölting {title && `- ${capitalizedTitle}`}</title>
+      </Head>
+      <Header />
+      {props.children}
+    </React.Fragment>
+  );
+};
+
+export default withRouter(Layout);

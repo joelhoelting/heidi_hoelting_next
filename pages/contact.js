@@ -1,10 +1,8 @@
-import Layout from '../layouts/primary';
-
 const Contact = () => {
   return (
-    <Layout title='Contact'>
+    <React.Fragment>
       <h1>Contact Page</h1>
-    </Layout>
+    </React.Fragment>
   );
 };
 

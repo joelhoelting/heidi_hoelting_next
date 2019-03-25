@@ -51,11 +51,9 @@ const Bullet = styled.button`
   padding: 5px;
   width: 15px;
   transition: background 300ms ease;
-  border: 2px solid #000;
   
   ${mediaMin.desktopSmall`
     margin: 10px 0;
-    border: none;
     &:hover {
       background: #000
     }

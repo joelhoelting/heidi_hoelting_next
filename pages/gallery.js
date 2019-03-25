@@ -1,10 +1,8 @@
-import Layout from '../layouts/primary';
-
 const Gallery = () => {
   return (
-    <Layout title='Gallery'>
+    <React.Fragment>
       <h1>Gallery Page</h1>
-    </Layout>
+    </React.Fragment>
   );
 };
 
