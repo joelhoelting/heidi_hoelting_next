@@ -15,6 +15,7 @@ const PlayPause = props => {
 export default PlayPause;
 
 const PlayPauseContainer = styled.div`
+  border-radius: 50%;
   cursor: pointer;
   height: 50px;
   width: 50px;
