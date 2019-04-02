@@ -1,24 +1,12 @@
 import styled from 'styled-components';
 import { mediaMin } from '../../../styles/mediaQueries';
 
-const Hamburger = ({ mobileNavActive, toggleMobileNav }) => {
+const Hamburger = ({ active, toggleMobileNav }) => {
   return (
     <HamburgerDivContainer onClick={toggleMobileNav}>
       <HamburgerDiv>
-        <Line
-          active={mobileNavActive}
-          rotate="-45deg"
-          top="35%"
-          topHover="30%"
-          transformOrigin="right"
-        />
-        <Line
-          active={mobileNavActive}
-          rotate="45deg"
-          top="70%"
-          topHover="60%"
-          transformOrigin="right"
-        />
+        <Line active={active} rotate="-45deg" top="35%" topHover="30%" transformOrigin="right" />
+        <Line active={active} rotate="45deg" top="70%" topHover="60%" transformOrigin="right" />
       </HamburgerDiv>
     </HamburgerDivContainer>
   );
@@ -28,6 +16,7 @@ export default Hamburger;
 
 const HamburgerDivContainer = styled.div`
   cursor: pointer;
+  z-index: 1;
 `;
 
 const HamburgerDiv = styled.div`

@@ -17,6 +17,7 @@ class Header extends React.Component {
   }
 
   render() {
+    const { mobileNavActive } = this.state;
     return (
       <HeaderWrapper>
         <h1 key="index">
@@ -25,8 +26,8 @@ class Header extends React.Component {
           </Link>
         </h1>
         <MobileNavigation
-          mobileNavActive={this.state.mobileNavActive}
-          toggleMobileNav={() => this.setState({ mobileNavActive: !this.state.mobileNavActive })}
+          mobileNavActive={mobileNavActive}
+          toggleMobileNav={() => this.setState({ mobileNavActive: !mobileNavActive })}
         />
         <DesktopNavigation />
       </HeaderWrapper>
@@ -55,6 +56,7 @@ const HeaderWrapper = styled.header`
     cursor: pointer;
     font-weight: normal;
     font-size: 1.4rem;
+    z-index: 1;
     ${mediaMin.tabletLandscape`
       font-size: 2rem;
       margin: 0 40px;

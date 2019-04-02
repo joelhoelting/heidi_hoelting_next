@@ -1,26 +1,20 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 
+import { pages } from '../../../data/pages';
+import { capitalizeFirstLetter } from '../../../helpers/strings';
 import { mediaMax } from '../../../styles/mediaQueries';
 
 const DesktopNavigation = () => {
   return (
     <StyledUl>
-      <li key="gallery">
-        <Link href="/gallery">
-          <a>Gallery</a>
-        </Link>
-      </li>
-      <li key="about">
-        <Link href="/about">
-          <a>About</a>
-        </Link>
-      </li>
-      <li key="contact">
-        <Link href="/contact">
-          <a>Contact</a>
-        </Link>
-      </li>
+      {pages.map(page => (
+        <li key={`page-${page}`}>
+          <Link href={`/${page}`}>
+            <a>{capitalizeFirstLetter(page)}</a>
+          </Link>
+        </li>
+      ))}
     </StyledUl>
   );
 };
