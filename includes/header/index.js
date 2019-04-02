@@ -5,12 +5,12 @@ import styled from 'styled-components';
 
 import MobileNavigation from './MobileNavigation';
 import DesktopNavigation from './DesktopNavigation';
-import { mediaMin } from '~/styles/mediaQueries';
+import { mediaMin } from '../../styles/mediaQueries';
 
 class Header extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
-    
+
     this.state = {
       mobileNavActive: false
     };
@@ -19,14 +19,14 @@ class Header extends React.Component {
   render() {
     return (
       <HeaderWrapper>
-        <h1 key='index'>
-          <Link href='/'>
-            <a>Heidi Hölting</a> 
+        <h1 key="index">
+          <Link href="/">
+            <a>Heidi Hölting</a>
           </Link>
         </h1>
-        <MobileNavigation 
+        <MobileNavigation
           mobileNavActive={this.state.mobileNavActive}
-          toggleMobileNav={() => this.setState({ mobileNavActive: !this.state.mobileNavActive })} 
+          toggleMobileNav={() => this.setState({ mobileNavActive: !this.state.mobileNavActive })}
         />
         <DesktopNavigation />
       </HeaderWrapper>
@@ -61,5 +61,3 @@ const HeaderWrapper = styled.header`
     `}
   }
 `;
-
-

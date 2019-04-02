@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 const TypographyStyle = createGlobalStyle`
   html, body {
@@ -21,8 +21,12 @@ const TypographyStyle = createGlobalStyle`
 
   a {
     text-decoration: none;
+    color: inherit;
     &:hover {
       text-decoration: underline;
+    }
+    &:target {
+      color: blue;
     }
     &:visited {
       color: inherit;

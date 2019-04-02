@@ -1,23 +1,23 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 
-import { mediaMax } from '~/styles/mediaQueries';
+import { mediaMax } from '../../../styles/mediaQueries';
 
 const DesktopNavigation = () => {
   return (
     <StyledUl>
-      <li key='gallery'>
-        <Link href='/gallery'>
+      <li key="gallery">
+        <Link href="/gallery">
           <a>Gallery</a>
         </Link>
       </li>
-      <li key='about'>
-        <Link href='/about'>
+      <li key="about">
+        <Link href="/about">
           <a>About</a>
         </Link>
       </li>
-      <li key='contact'>
-        <Link href='/contact'>
+      <li key="contact">
+        <Link href="/contact">
           <a>Contact</a>
         </Link>
       </li>

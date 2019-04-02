@@ -1,12 +1,24 @@
 import styled from 'styled-components';
-import { mediaMin } from '~/styles/mediaQueries';
+import { mediaMin } from '../../../styles/mediaQueries';
 
-const Hamburger = props => {
+const Hamburger = ({ mobileNavActive, toggleMobileNav }) => {
   return (
-    <HamburgerDivContainer onClick={props.toggleMobileNav}>
+    <HamburgerDivContainer onClick={toggleMobileNav}>
       <HamburgerDiv>
-        <Line top='35%' active={props.mobileNavActive} topHover='30%' rotate='-45deg' transformOrigin='right'/>
-        <Line top='65%' active={props.mobileNavActive} topHover='60%' rotate='45deg' transformOrigin='right'/>
+        <Line
+          active={mobileNavActive}
+          rotate="-45deg"
+          top="35%"
+          topHover="30%"
+          transformOrigin="right"
+        />
+        <Line
+          active={mobileNavActive}
+          rotate="45deg"
+          top="70%"
+          topHover="60%"
+          transformOrigin="right"
+        />
       </HamburgerDiv>
     </HamburgerDivContainer>
   );
@@ -36,6 +48,6 @@ const Line = styled.div`
   top: ${props => props.top};
   transition: all 200ms ease;
   transform-origin: ${props => props.transformOrigin};
-  transform: ${props => props.active ? `rotate(${props.rotate})` : 'rotate(0)'};
-  width: ${props => props.active ? '80%' : '100%'};
+  transform: ${props => (props.active ? `rotate(${props.rotate})` : 'rotate(0)')};
+  width: 100%;
 `;

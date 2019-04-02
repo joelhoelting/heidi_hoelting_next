@@ -1,15 +1,9 @@
-import styled from 'styled-components';
-import { mediaMin } from '~/styles/mediaQueries';
-
 import Hamburger from './Hamburger';
 
-const MobileNavigation = props => {
+const MobileNavigation = ({ mobileNavActive, toggleMobileNav }) => {
   return (
     <React.Fragment>
-      <Hamburger 
-        toggleMobileNav={props.toggleMobileNav} 
-        mobileNavActive={props.mobileNavActive}
-      />
+      <Hamburger toggleMobileNav={toggleMobileNav} mobileNavActive={mobileNavActive} />
       {/* <MobileMenu /> */}
     </React.Fragment>
   );
