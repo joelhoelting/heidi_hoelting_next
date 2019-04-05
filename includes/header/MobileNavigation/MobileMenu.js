@@ -24,7 +24,7 @@ const MobileMenu = ({ active, toggleMobileNav }) => (
 export default MobileMenu;
 
 const MobileMenuWrapper = styled.div`
-  background: grey;
+  background: #fff;
   position: fixed;
   top: 0;
   left: 0;
@@ -45,18 +45,18 @@ const MobileMenuWrapper = styled.div`
     li {
       list-style-type: none;
       text-align: center;
-      font-size: 1.8em;
+      font-size: 2.4em;
       margin: 1em 0;
       opacity: ${props => (props.active ? 1 : 0)};
-      transform: ${props => (props.active ? 0 : 'translateY(-10px)')};
+      text-transform: uppercase;
       &:nth-child(1) {
-        ${props => props.active && 'transition: transform 300ms ease-in-out 100ms, opacity 1000ms ease 100ms'};
+        ${props => props.active && 'transition: opacity 300ms ease 300ms'};
       }
       &:nth-child(2) {
-        ${props => props.active && 'transition: transform 300ms ease-in-out 100ms, opacity 1000ms ease 200ms'};
+        ${props => props.active && 'transition: opacity 300ms ease 500ms'};
       }
       &:nth-child(3) {
-        ${props => props.active && 'transition: transform 300ms ease-in-out 100ms, opacity 1000ms ease 300ms'};
+        ${props => props.active && 'transition: opacity 300ms ease 700ms'};
       }
     }
   }
