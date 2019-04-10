@@ -5,7 +5,7 @@ import { pages } from '../../../data/pages';
 import { capitalizeFirstLetter } from '../../../helpers/strings';
 import { mediaMax } from '../../../styles/mediaQueries';
 
-const DesktopNavigation = () => {
+const DesktopNavigation = ({ textColor }) => {
   return (
     <StyledUl>
       {pages.map(page => (
@@ -30,9 +30,11 @@ const StyledUl = styled.ul`
     display: none;
   `}
   li {
-    margin: 0 40px;
+    margin: 0 1.4em;
     font-size: 1.4rem;
     cursor: pointer;
     letter-spacing: 2px;
+    color: ${props => props.textColor};
+    transition: color 300ms ease 200ms;
   }
 `;
