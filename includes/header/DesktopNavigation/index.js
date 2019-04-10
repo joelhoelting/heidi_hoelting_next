@@ -3,21 +3,21 @@ import styled from 'styled-components';
 
 import { mediaMax } from '~/styles/mediaQueries';
 
-const DesktopNavigation = () => {
+const DesktopNavigation = ({ textColor }) => {
   return (
-    <StyledUl>
-      <li key='gallery'>
-        <Link href='/gallery'>
+    <StyledUl textColor={textColor}>
+      <li key="gallery">
+        <Link href="/gallery">
           <a>Gallery</a>
         </Link>
       </li>
-      <li key='about'>
-        <Link href='/about'>
+      <li key="about">
+        <Link href="/about">
           <a>About</a>
         </Link>
       </li>
-      <li key='contact'>
-        <Link href='/contact'>
+      <li key="contact">
+        <Link href="/contact">
           <a>Contact</a>
         </Link>
       </li>
@@ -36,9 +36,11 @@ const StyledUl = styled.ul`
     display: none;
   `}
   li {
-    margin: 0 40px;
+    margin: 0 1.4em;
     font-size: 1.4rem;
     cursor: pointer;
     letter-spacing: 2px;
+    color: ${props => props.textColor};
+    transition: color 300ms ease 200ms;
   }
 `;

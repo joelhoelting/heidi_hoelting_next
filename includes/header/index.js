@@ -1,40 +1,45 @@
 import React from 'react';
 import Link from 'next/link';
+import { withRouter } from 'next/router';
 
 import styled from 'styled-components';
 
 import MobileNavigation from './MobileNavigation';
 import DesktopNavigation from './DesktopNavigation';
 import { mediaMin } from '~/styles/mediaQueries';
+import routerColors from '~/data/routeColors';
 
 class Header extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
-    
+
     this.state = {
       mobileNavActive: false
     };
   }
 
   render() {
+    const route = this.props.router.pathname.replace('/', '').toLowerCase() || 'home';
+    const textColor = routerColors[route].color;
+
     return (
-      <HeaderWrapper>
-        <h1 key='index'>
-          <Link href='/'>
-            <a>Heidi Hölting</a> 
+      <HeaderWrapper textColor={textColor}>
+        <h1 key="index">
+          <Link href="/">
+            <a>Heidi Hölting</a>
           </Link>
         </h1>
-        <MobileNavigation 
+        <MobileNavigation
           mobileNavActive={this.state.mobileNavActive}
-          toggleMobileNav={() => this.setState({ mobileNavActive: !this.state.mobileNavActive })} 
+          toggleMobileNav={() => this.setState({ mobileNavActive: !this.state.mobileNavActive })}
         />
-        <DesktopNavigation />
+        <DesktopNavigation textColor={textColor} />
       </HeaderWrapper>
     );
   }
 }
 
-export default Header;
+export default withRouter(Header);
 
 const HeaderWrapper = styled.header`
   position: fixed;
@@ -55,11 +60,11 @@ const HeaderWrapper = styled.header`
     cursor: pointer;
     font-weight: normal;
     font-size: 1.4rem;
+    color: ${props => props.textColor};
+    transition: color 300ms ease 200ms;
     ${mediaMin.tabletLandscape`
       font-size: 2rem;
       margin: 0 40px;
     `}
   }
 `;
-
-
