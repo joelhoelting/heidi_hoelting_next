@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const TypographyStyle = createGlobalStyle`
   html, body {
@@ -14,7 +14,7 @@ const TypographyStyle = createGlobalStyle`
     letter-spacing: 2px;
   }
 
-  p {
+  p, li {
     font-family: 'Philosopher', serif;
     letter-spacing: 1px;
   }
