@@ -1,14 +1,14 @@
-import CoverImage from '~/components/CoverImage';
-import Bullets from '~/components/Bullets';
-import PlayPause from '~/components/PlayPause';
-import IntroDiv from '~/components/IntroDiv';
+import CoverImage from '../components/CoverImage';
+import Bullets from '../components/Bullets';
+import PlayPause from '../components/PlayPause';
+import IntroDiv from '../components/IntroDiv';
 
-import homeCarouselData from '~/data/homeCarouselData';
+import homeCarouselData from '../data/homeCarouselData';
 
 class Index extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
-    
+
     this.state = {
       initialLoad: false
     };
@@ -27,15 +27,14 @@ class Index extends React.Component {
   componentWillUnmount() {
     if (this.imageInterval) {
       this.stopImageRotation();
-    } else {
-      null;
     }
   }
 
-  handleInitialLoad() {  
-    if (!this.state.initialLoad) {
+  handleInitialLoad() {
+    const { initialLoad } = this.state;
+    if (!initialLoad) {
       setTimeout(() => {
-        this.setState({ initialLoad: true, activeImage: 0});
+        this.setState({ initialLoad: true, activeImage: 0 });
       }, 300);
       setTimeout(() => {
         this.startImageRotation(1);
@@ -44,15 +43,17 @@ class Index extends React.Component {
   }
 
   toggleSlideShow() {
-    if (this.state.slideShowActive) {
-      this.stopImageRotation(this.state.activeImage);
+    const { activeImage, slideShowActive } = this.state;
+    if (slideShowActive) {
+      this.stopImageRotation(activeImage);
     } else {
       this.startImageRotation();
     }
   }
 
   startImageRotation(activeImage = false) {
-    if (!this.state.slideShowActive) {
+    const { slideShowActive } = this.state;
+    if (!slideShowActive) {
       let newState;
       if (activeImage) {
         newState = { slideShowActive: true, activeImage };
@@ -65,66 +66,64 @@ class Index extends React.Component {
   }
 
   stopImageRotation(index) {
-    this.setState({ activeImage: index, slideShowActive: false});
+    this.setState({ activeImage: index, slideShowActive: false });
     clearInterval(this.imageInterval);
   }
 
   changeImage() {
-    let activeImage;
-    this.state.activeImage === this.imageCount ? activeImage = 1 : activeImage = this.state.activeImage + 1;
+    const currentImage = this.state.activeImage;
+    const activeImage = currentImage === this.imageCount ? 1 : currentImage + 1;
     this.setState({ activeImage });
   }
 
   generateCarousel() {
     return homeCarouselData.map((image, index) => {
-      if (index === 0) {
+      const { activeImage } = this.state;
+      if (image.initialImage) {
         return (
           <CoverImage
-            key={`cover-image-${index}`} 
-            active={this.state.activeImage === index} 
+            key={`cover-image-${image.id}`}
+            active={activeImage === index}
             src={image.src}
             ref={this.initialImage}
-            onLoad={this.handleInitialLoad.bind(this)} 
-          />
-        );
-      } else {
-        return (
-          <CoverImage 
-            key={`cover-image-${index}`} 
-            active={this.state.activeImage === index}
-            src={image.src}
+            onLoad={() => this.handleInitialLoad}
           />
         );
       }
+      return <CoverImage key={`cover-image-${image.id}`} active={activeImage === index} src={image.src} />;
     });
   }
 
   renderBullets() {
-    if (this.state.initialLoad) {
+    const { activeImage, initialLoad } = this.state;
+    if (initialLoad) {
       return (
-        <Bullets 
-          imageCount={this.imageCount} 
-          active={this.state.activeImage !== 0}
-          activeImage={this.state.activeImage}
-          stopImageRotation={this.stopImageRotation.bind(this)}
+        <Bullets
+          imageCount={this.imageCount}
+          active={activeImage !== 0}
+          activeImage={activeImage}
+          stopImageRotation={index => this.stopImageRotation(index)}
         />
       );
     }
+    return null;
   }
 
   renderPlayPause() {
-    if (this.state.initialLoad) {
+    const { activeImage, initialLoad, slideShowActive } = this.state;
+    if (initialLoad) {
       return (
         <PlayPause
-          slideShowActive={this.state.slideShowActive}
-          slideShowInitialized={this.state.activeImage !== 0}
-          toggleSlideShow={() => this.toggleSlideShow() } 
+          slideShowActive={slideShowActive}
+          slideShowInitialized={activeImage !== 0}
+          toggleSlideShow={() => this.toggleSlideShow()}
         />
       );
     }
+    return null;
   }
 
-  render () {
+  render() {
     return (
       <React.Fragment>
         {this.generateCarousel()}
@@ -137,4 +136,3 @@ class Index extends React.Component {
 }
 
 export default Index;
-

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import MobileNavigation from './MobileNavigation';
 import DesktopNavigation from './DesktopNavigation';
+
 import { mediaMin } from '~/styles/mediaQueries';
 import routerColors from '~/data/routeColors';
 
@@ -62,6 +63,7 @@ const HeaderWrapper = styled.header`
     font-size: 1.4rem;
     color: ${props => props.textColor};
     transition: color 300ms ease 200ms;
+
     ${mediaMin.tabletLandscape`
       font-size: 2rem;
       margin: 0 40px;

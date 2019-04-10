@@ -14,15 +14,19 @@ const TypographyStyle = createGlobalStyle`
     letter-spacing: 2px;
   }
 
-  p {
+  p, li {
     font-family: 'Philosopher', serif;
     letter-spacing: 1px;
   }
 
   a {
     text-decoration: none;
+    color: inherit;
     &:hover {
       text-decoration: underline;
+    }
+    &:target {
+      color: blue;
     }
     &:visited {
       color: inherit;
