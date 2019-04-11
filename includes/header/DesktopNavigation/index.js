@@ -7,34 +7,60 @@ import { mediaMax } from '../../../styles/mediaQueries';
 
 const DesktopNavigation = props => {
   return (
-    <StyledUl {...props}>
-      {pages.map(page => (
-        <li key={`page-${page}`}>
-          <Link href={`/${page}`}>
-            <a>{capitalizeFirstLetter(page)}</a>
-          </Link>
-        </li>
-      ))}
-    </StyledUl>
+    <StyledNav {...props}>
+      <ul {...props}>
+        {pages.map(page => (
+          <li key={`page-${page}`}>
+            <Link href={`/${page}`}>
+              <a>{capitalizeFirstLetter(page)}</a>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </StyledNav>
   );
 };
 
 export default DesktopNavigation;
 
-const StyledUl = styled.ul`
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  list-style-type: none;
+const StyledNav = styled.nav`
   ${mediaMax.tabletLandscape`
     display: none;
   `}
-  li {
-    margin: 0 1.4em;
-    font-size: 1.4rem;
-    cursor: pointer;
-    letter-spacing: 2px;
-    color: ${props => props.textColor};
-    transition: color 300ms ease 200ms;
+  ul {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    li {
+      margin: 0 1.4em;
+      font-size: 1.4rem;
+      cursor: pointer;
+      letter-spacing: 2px;
+      color: ${props => props.textColor};
+      transition: color 300ms ease 200ms;
+      a {
+        position: relative;
+        text-decoration: none;
+      }
+      a:before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        bottom: -10px;
+        left: 0;
+        background-color: ${props => props.textColor};
+        visibility: hidden;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: all 0.3s ease-in-out 0s;
+      }
+      a:hover:before {
+        visibility: visible;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+      }
+    }
   }
 `;

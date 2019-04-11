@@ -65,6 +65,26 @@ const HeaderWrapper = styled.header`
     color: ${props => (props.mobileNavActive ? 'black' : props.textColor)};
     transition: color 300ms ease;
     z-index: 999;
+    position: relative;
+    text-decoration: none;
+    &:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      bottom: -8px;
+      left: 0;
+      background-color: ${props => props.textColor};
+      visibility: hidden;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: all 0.3s ease-in-out 0s;
+    }
+    &:hover:before {
+      visibility: visible;
+      -webkit-transform: scaleX(1);
+      transform: scaleX(1);
+    }
 
     ${mediaMin.tabletLandscape`
       font-size: 2rem;

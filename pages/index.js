@@ -14,16 +14,10 @@ class Index extends React.Component {
     };
 
     this.imageCount = homeCarouselData.length - 1;
-    this.initialImage = React.createRef();
   }
 
   componentDidMount() {
-    const img = this.initialImage.current;
-    setTimeout(() => {
-      if (img && img.complete) {
-        this.handleInitialLoad();
-      }
-    }, 100);
+    this.handleInitialLoad();
   }
 
   componentWillUnmount() {
@@ -33,7 +27,6 @@ class Index extends React.Component {
   }
 
   handleInitialLoad() {
-    console.log('this triggers');
     const { initialLoad } = this.state;
     if (!initialLoad) {
       setTimeout(() => {
@@ -83,15 +76,7 @@ class Index extends React.Component {
     return homeCarouselData.map((image, index) => {
       const { activeImage } = this.state;
       if (image.initialImage) {
-        return (
-          <CoverImage
-            key={`cover-image-${image.id}`}
-            active={activeImage === index}
-            src={image.src}
-            ref={this.initialImage}
-            onLoad={() => this.handleInitialLoad}
-          />
-        );
+        return <CoverImage key={`cover-image-${image.id}`} active={activeImage === index} src={image.src} />;
       }
       return <CoverImage key={`cover-image-${image.id}`} active={activeImage === index} src={image.src} />;
     });
