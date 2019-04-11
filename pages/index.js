@@ -19,9 +19,11 @@ class Index extends React.Component {
 
   componentDidMount() {
     const img = this.initialImage.current;
-    if (img && img.complete) {
-      this.handleInitialLoad();
-    }
+    setTimeout(() => {
+      if (img && img.complete) {
+        this.handleInitialLoad();
+      }
+    }, 100);
   }
 
   componentWillUnmount() {
@@ -31,6 +33,7 @@ class Index extends React.Component {
   }
 
   handleInitialLoad() {
+    console.log('this triggers');
     const { initialLoad } = this.state;
     if (!initialLoad) {
       setTimeout(() => {

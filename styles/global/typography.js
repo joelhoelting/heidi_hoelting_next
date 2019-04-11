@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 const TypographyStyle = createGlobalStyle`
   html, body {
-    fontSize: 100%;
+    font-size: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
     -o-font-smoothing: antialiased;

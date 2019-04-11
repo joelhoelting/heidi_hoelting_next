@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { mediaMin } from '../../../styles/mediaQueries';
 
-const Hamburger = ({ active, toggleMobileNav }) => {
+const Hamburger = ({ active, textColor, toggleMobileNav }) => {
+  console.log(textColor);
   return (
     <HamburgerDivContainer onClick={toggleMobileNav}>
       <HamburgerDiv>
-        <Line active={active} rotate="-45deg" top="35%" topHover="30%" transformOrigin="right" />
-        <Line active={active} rotate="45deg" top="70%" topHover="60%" transformOrigin="right" />
+        <Line textColor={textColor} active={active} rotate="-45deg" top="35%" topHover="30%" transformOrigin="right" />
+        <Line textColor={textColor} active={active} rotate="45deg" top="70%" topHover="60%" transformOrigin="right" />
       </HamburgerDiv>
     </HamburgerDivContainer>
   );
@@ -30,7 +31,7 @@ const HamburgerDiv = styled.div`
 `;
 
 const Line = styled.div`
-  background: black;
+  background: ${props => (props.active ? 'black' : props.textColor)};
   display: block;
   height: 2px;
   position: absolute;

@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { mediaMin } from '~/styles/mediaQueries';
+import { mediaMin } from '../mediaQueries';
 
 const ContainerStyles = createGlobalStyle`
   .container {

@@ -7,8 +7,8 @@ import styled from 'styled-components';
 import MobileNavigation from './MobileNavigation';
 import DesktopNavigation from './DesktopNavigation';
 
-import { mediaMin } from '~/styles/mediaQueries';
-import routerColors from '~/data/routeColors';
+import { mediaMin } from '../../styles/mediaQueries';
+import routerColors from '../../data/routeColors';
 
 class Header extends React.Component {
   constructor(props) {
@@ -20,19 +20,20 @@ class Header extends React.Component {
   }
 
   render() {
-    const route = this.props.router.pathname.replace('/', '').toLowerCase() || 'home';
+    const { mobileNavActive } = this.state;
+    const { router } = this.props;
+    const route = router.pathname.replace('/', '').toLowerCase() || 'home';
     const textColor = routerColors[route].color;
 
     return (
-      <HeaderWrapper textColor={textColor}>
-        <h1 key="index">
-          <Link href="/">
-            <a>Heidi Hölting</a>
-          </Link>
-        </h1>
+      <HeaderWrapper mobileNavActive={mobileNavActive} textColor={textColor}>
+        <Link href="/">
+          <a className="main-logo">Heidi Hölting</a>
+        </Link>
         <MobileNavigation
-          mobileNavActive={this.state.mobileNavActive}
-          toggleMobileNav={() => this.setState({ mobileNavActive: !this.state.mobileNavActive })}
+          textColor={textColor}
+          mobileNavActive={mobileNavActive}
+          toggleMobileNav={() => this.setState({ mobileNavActive: !mobileNavActive })}
         />
         <DesktopNavigation textColor={textColor} />
       </HeaderWrapper>
@@ -56,13 +57,14 @@ const HeaderWrapper = styled.header`
   ${mediaMin.tabletLandscape`
     height: 100px;
   `}
-  h1 {
+  .main-logo {
     margin: 0 20px;
     cursor: pointer;
     font-weight: normal;
-    font-size: 1.4rem;
-    color: ${props => props.textColor};
-    transition: color 300ms ease 200ms;
+    font-size: 1.8rem;
+    color: ${props => (props.mobileNavActive ? 'black' : props.textColor)};
+    transition: color 300ms ease;
+    z-index: 999;
 
     ${mediaMin.tabletLandscape`
       font-size: 2rem;

@@ -18,7 +18,8 @@ class About extends Component {
   }
 
   render() {
-    return <AboutWrapper mounted={this.state.mounted}>Hello World</AboutWrapper>;
+    const { mounted } = this.state;
+    return <AboutWrapper mounted={mounted}>Hello World</AboutWrapper>;
   }
 }
 

@@ -1,10 +1,10 @@
 import Hamburger from './Hamburger';
 import MobileMenu from './MobileMenu';
 
-const MobileNavigation = ({ mobileNavActive, toggleMobileNav }) => {
+const MobileNavigation = ({ mobileNavActive, toggleMobileNav, textColor }) => {
   return (
     <React.Fragment>
-      <Hamburger toggleMobileNav={toggleMobileNav} active={mobileNavActive} />
+      <Hamburger textColor={textColor} toggleMobileNav={toggleMobileNav} active={mobileNavActive} />
       <MobileMenu toggleMobileNav={toggleMobileNav} active={mobileNavActive} />
     </React.Fragment>
   );

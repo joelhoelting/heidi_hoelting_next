@@ -5,9 +5,9 @@ import { pages } from '../../../data/pages';
 import { capitalizeFirstLetter } from '../../../helpers/strings';
 import { mediaMax } from '../../../styles/mediaQueries';
 
-const DesktopNavigation = ({ textColor }) => {
+const DesktopNavigation = props => {
   return (
-    <StyledUl>
+    <StyledUl {...props}>
       {pages.map(page => (
         <li key={`page-${page}`}>
           <Link href={`/${page}`}>
