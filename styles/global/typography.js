@@ -14,7 +14,7 @@ const TypographyStyle = createGlobalStyle`
     letter-spacing: 2px;
   }
 
-  p, li {
+  p, li, input, label, span, textarea {
     font-family: 'Philosopher', serif;
     letter-spacing: 1px;
   }

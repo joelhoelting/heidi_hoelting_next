@@ -1,6 +1,5 @@
+import { Component } from 'react';
 import styled from 'styled-components';
-
-import React, { Component } from 'react';
 
 class About extends Component {
   constructor(props) {
@@ -19,7 +18,19 @@ class About extends Component {
 
   render() {
     const { mounted } = this.state;
-    return <AboutWrapper mounted={mounted}>Hello World</AboutWrapper>;
+    return (
+      <AboutWrapper mounted={mounted}>
+        <section>
+          <h1>Heidi Hoelting</h1>
+          <p>
+            Officia commodo consectetur anim ut veniam. Ex cillum exercitation ad cillum eiusmod veniam sunt irure culpa
+            deserunt deserunt exercitation. Velit officia enim labore amet nisi esse reprehenderit ad. Officia commodo
+            consectetur anim ut veniam. Ex cillum exercitation ad cillum eiusmod veniam sunt irure culpa deserunt
+            deserunt exercitation. Velit officia enim labore amet nisi esse reprehenderit ad.
+          </p>
+        </section>
+      </AboutWrapper>
+    );
   }
 }
 
@@ -33,4 +44,26 @@ const AboutWrapper = styled.div`
   background-position: center center;
   opacity: ${props => (!props.mounted ? 0 : 1)};
   transition: opacity 300ms ease;
+  position: relative;
+  section {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+    h1 {
+      font-size: 3rem;
+      opacity: ${props => (!props.mounted ? 0 : 1)};
+      transition: opacity 400ms ease-in-out 200ms;
+    }
+    p {
+      max-width: 750px;
+      opacity: ${props => (!props.mounted ? 0 : 1)};
+      transition: opacity 400ms ease-in-out 400ms;
+    }
+  }
 `;
