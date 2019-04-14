@@ -24,15 +24,21 @@ class Index extends React.Component {
     if (this.imageInterval) {
       this.stopImageRotation();
     }
+    if (this.timerInitialLoad) {
+      clearTimeout(this.timerInitialLoad);
+    }
+    if (this.timerStartImageRotation) {
+      clearTimeout(this.timerStartImageRotation);
+    }
   }
 
   handleInitialLoad() {
     const { initialLoad } = this.state;
     if (!initialLoad) {
-      setTimeout(() => {
+      this.timerInitialLoad = setTimeout(() => {
         this.setState({ initialLoad: true, activeImage: 0 });
       }, 300);
-      setTimeout(() => {
+      this.timerStartImageRotation = setTimeout(() => {
         this.startImageRotation(1);
       }, 4000);
     }

@@ -1,168 +1,147 @@
+import React, { Component } from 'react';
 import styled from 'styled-components';
+import { mediaMin } from '../styles/mediaQueries';
 
-const Contact = () => {
-  return (
-    <ContactWrapper>
-      <h1>Contact</h1>
-      <form>
-        <section>
-          <span class="input input--ruri">
-            <input className="input__field input__field--ruri" type="text" id="name" />
-            <label className="input__label input__label--ruri" for="name">
-              <span className="input__label-content input__label-content--ruri">Your Name*</span>
-            </label>
-          </span>
-          <span className="input input--ruri">
-            <input className="input__field input__field--ruri" type="text" id="email" />
-            <label className="input__label input__label--ruri" for="email">
-              <span className="input__label-content input__label-content--ruri">Your Email Address *</span>
-            </label>
-          </span>
-          <textarea placeholder="Your message to me..." />
-          <button type="submit">Send</button>
-        </section>
-      </form>
-    </ContactWrapper>
-  );
-};
+class Contact extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: '',
+      email: '',
+      textarea: ''
+    };
+  }
+
+  handleChange(e) {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+  }
+
+  render() {
+    const { name, email, textarea } = this.state;
+
+    return (
+      <ContactWrapper className="contact-container">
+        <h1>Contact</h1>
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="name">
+            <input
+              className={name ? 'filled' : null}
+              type="text"
+              id="name"
+              name="name"
+              onChange={e => this.handleChange(e)}
+              value={name}
+            />
+            <span>Your Name*</span>
+          </label>
+          <label htmlFor="email">
+            <input
+              className={email ? 'filled' : null}
+              type="text"
+              id="email"
+              name="email"
+              onChange={e => this.handleChange(e)}
+              value={email}
+            />
+            <span>Your Email Address *</span>
+          </label>
+          <textarea
+            placeholder="Your message to me..."
+            name="textarea"
+            onChange={e => this.handleChange(e)}
+            value={textarea}
+          />
+          <button type="submit">SEND</button>
+        </form>
+      </ContactWrapper>
+    );
+  }
+}
 
 export default Contact;
 
 const ContactWrapper = styled.div`
   height: 100%;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  text-align: center;
+  ${mediaMin.tablet`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  `}
+  h1 {
+    margin: 0;
+  }
   form {
-    width: 40%;
-    .input {
-      position: relative;
-      z-index: 1;
-      display: inline-block;
-      margin: 1em;
-      max-width: 100%;
-      width: calc(100% - 2em);
-      vertical-align: top;
-    }
-    .input__field {
-      position: relative;
+    width: 600px;
+    max-width: 90%;
+    margin: 0 auto;
+    label {
+      width: 100%;
       display: block;
-      float: right;
-      padding: 0.8em;
-      width: 60%;
-      border: none;
-      border-radius: 0;
-      color: #aaa;
-      font-weight: 400;
-      font-family: 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      -webkit-appearance: none; /* for box shadows to show on iOS */
-    }
-
-    .input__field:focus {
-      outline: none;
-    }
-
-    .input__label {
-      display: inline-block;
-      float: right;
-      padding: 0 1em;
-      width: 40%;
-      color: #696969;
-      font-weight: bold;
-      font-size: 70.25%;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      -khtml-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    .input__label-content {
       position: relative;
-      display: block;
-      padding: 1.6em 0;
       width: 100%;
+      margin: 1em 0;
+      height: 70px;
+      margin: 1em 0;
+      input {
+        height: 40px;
+        width: 100%;
+        padding: 0 1em;
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        border-bottom: 2px solid black;
+        background: none;
+        &.filled + span,
+        &:focus + span {
+          top: 3.2em;
+          font-size: 0.8rem;
+          color: grey;
+        }
+      }
+      span {
+        position: absolute;
+        left: 1em;
+        top: 0.8em;
+        cursor: text;
+        transition: all 200ms ease;
+        font-size: 1rem;
+      }
     }
-    .input__field--ruri {
-      width: 100%;
-      background: transparent;
-      padding: 0.5em 0;
-      margin-bottom: 2em;
-      color: #000;
-    }
-
-    .input__label--ruri {
-      width: 100%;
-      position: absolute;
-      text-align: left;
-      font-size: 1em;
-      padding: 10px 0 5px;
-      pointer-events: none;
-    }
-
-    .input__label--ruri::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 5px;
-      background: #000;
-      left: 0;
-      top: 100%;
-      -webkit-transform-origin: 50% 100%;
-      transform-origin: 50% 100%;
-      -webkit-transition: -webkit-transform 0.3s, background-color 0.3s;
-      transition: transform 0.3s, background-color 0.3s;
-    }
-
-    .input__label-content--ruri {
-      padding: 0;
-      -webkit-transform-origin: 0 0;
-      transform-origin: 0 0;
-      -webkit-transition: -webkit-transform 0.3s, color 0.3s;
-      transition: transform 0.3s, color 0.3s;
-    }
-
-    .input__field--ruri:focus + .input__label--ruri::after,
-    .input--filled .input__label--ruri::after {
-      background: #000;
-      -webkit-transform: scale3d(1, 0.25, 1);
-      transform: scale3d(1, 0.25, 1);
-    }
-
-    .input__field--ruri:focus + .input__label--ruri .input__label-content--ruri,
-    .input--filled .input__label--ruri .input__label-content--ruri {
-      color: #000;
-      -webkit-transform: translate3d(0, 2em, 0) scale3d(0.655, 0.655, 1);
-      transform: translate3d(0, 2em, 0) scale3d(0.655, 0.655, 1);
-    }
-
     textarea {
-      width: calc(100% - 2em);
+      width: 100%;
       height: 200px;
       border: 2px solid #000;
+      border-radius: 5px;
       padding: 1em 1em;
-      background-image: url(bg.gif);
-      background-position: bottom right;
-      background-repeat: no-repeat;
       resize: none;
-      margin: 1em;
-      transition: border 300ms;
-      display: flex;
+      margin: 1em 0;
+      background: none;
     }
     button {
       border: 2px solid #000;
+      border-radius: 5px;
       background: none;
-      width: calc(100% - 2em);
+      width: 100%;
       padding: 1em 1em;
-      margin: 1em;
+      margin: 1em 0;
       transition: all 300ms ease;
       cursor: pointer;
+      font-size: 1.4rem;
+      color: #000;
       &:hover {
+        background: #000;
+        color: #fff;
+      }
+      &:focus {
         background: #000;
         color: #fff;
       }

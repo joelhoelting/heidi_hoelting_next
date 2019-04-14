@@ -5,10 +5,10 @@ import { pages } from '../../../data/pages';
 import { capitalizeFirstLetter } from '../../../helpers/strings';
 import { mediaMax } from '../../../styles/mediaQueries';
 
-const DesktopNavigation = props => {
+const DesktopNavigation = ({ textColor }) => {
   return (
-    <StyledNav {...props}>
-      <ul {...props}>
+    <StyledNav textColor={textColor}>
+      <ul>
         {pages.map(page => (
           <li key={`page-${page}`}>
             <Link href={`/${page}`}>
