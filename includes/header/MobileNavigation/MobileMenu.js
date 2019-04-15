@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 
-import { pages } from '../../../data/pages';
+import pages from '../../../data/pages';
 import { capitalizeFirstLetter } from '../../../helpers/strings';
 import { mediaMin } from '../../../styles/mediaQueries';
 
