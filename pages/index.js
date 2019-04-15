@@ -73,9 +73,9 @@ class Index extends React.Component {
   }
 
   changeImage() {
-    const currentImage = this.state.activeImage;
-    const activeImage = currentImage === this.imageCount ? 1 : currentImage + 1;
-    this.setState({ activeImage });
+    const { activeImage } = this.state;
+    const nextImage = activeImage === this.imageCount ? 1 : activeImage + 1;
+    this.setState({ activeImage: nextImage });
   }
 
   generateCarousel() {
@@ -116,10 +116,11 @@ class Index extends React.Component {
   }
 
   render() {
+    const { activeImage } = this.state;
     return (
       <React.Fragment>
         {this.generateCarousel()}
-        <IntroDiv active={this.state.activeImage === 0} />
+        <IntroDiv active={activeImage === 0} />
         {this.renderBullets()}
         {this.renderPlayPause()}
       </React.Fragment>

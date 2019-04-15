@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { mediaMin } from '../../../styles/mediaQueries';
 
-const IntroDiv = props => {
+const IntroDiv = ({ active }) => {
   return (
-    <IntroDivContainer active={props.active}>
+    <IntroDivContainer active={active}>
       <h1>Heidi Hölting</h1>
       <h6>Model</h6>
     </IntroDivContainer>
