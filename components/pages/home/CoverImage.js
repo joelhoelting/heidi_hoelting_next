@@ -8,8 +8,8 @@ const CoverImage = styled.img`
   position: absolute;
   top: 0;
   left: 0;
-  transition: opacity 600ms ease;
-  opacity: ${props => props.active ? 1 : 0};
+  transition: opacity 500ms ease;
+  opacity: ${props => (props.active ? 1 : 0)};
 `;
 
 export default CoverImage;

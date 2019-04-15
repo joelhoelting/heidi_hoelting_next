@@ -1,120 +1,131 @@
-import Layout from '../layouts/primary';
-import styled from 'styled-components';
-
-import CoverImage from '../components/CoverImage';
-import Bullets from '../components/Bullets';
+import CoverImage from '../components/pages/home/CoverImage';
+import Bullets from '../components/pages/home/Bullets';
+import PlayPause from '../components/pages/home/PlayPause';
+import IntroDiv from '../components/pages/home/IntroDiv';
 
 import homeCarouselData from '../data/homeCarouselData';
 
 class Index extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
-    
+
     this.state = {
       initialLoad: false
     };
 
     this.imageCount = homeCarouselData.length - 1;
-    this.initialImage = React.createRef();
-  }
-
-  startImageRotation() {
-    this.imageInterval = setInterval(() => this.changeImage(), 7000);
-  }
-
-  stopImageRotation(index) {
-    this.setState({ activeImage: index});
-    clearInterval(this.imageInterval);
-  }
-
-  changeImage() {
-    let activeImage;
-    this.state.activeImage === this.imageCount ? activeImage = 1 : activeImage = this.state.activeImage + 1;
-    this.setState({ activeImage });
   }
 
   componentDidMount() {
-    const img = this.initialImage.current;
-    if (img && img.complete) {
-      this.handleInitialLoad();
+    this.handleInitialLoad();
+  }
+
+  componentWillUnmount() {
+    if (this.imageInterval) {
+      this.stopImageRotation();
     }
-  } 
-  
-  handleInitialLoad() {  
-    if (!this.state.initialLoad) {
-      this.setState({ initialLoad: true, activeImage: 0});
-      setTimeout(() => {
-        this.setState({ activeImage: 1});
-        this.startImageRotation();
+    if (this.timerInitialLoad) {
+      clearTimeout(this.timerInitialLoad);
+    }
+    if (this.timerStartImageRotation) {
+      clearTimeout(this.timerStartImageRotation);
+    }
+  }
+
+  handleInitialLoad() {
+    const { initialLoad } = this.state;
+    if (!initialLoad) {
+      this.timerInitialLoad = setTimeout(() => {
+        this.setState({ initialLoad: true, activeImage: 0 });
+      }, 300);
+      this.timerStartImageRotation = setTimeout(() => {
+        this.startImageRotation(1);
       }, 4000);
     }
   }
 
+  toggleSlideShow() {
+    const { activeImage, slideShowActive } = this.state;
+    if (slideShowActive) {
+      this.stopImageRotation(activeImage);
+    } else {
+      this.startImageRotation();
+    }
+  }
+
+  startImageRotation(activeImage = false) {
+    const { slideShowActive } = this.state;
+    if (!slideShowActive) {
+      let newState;
+      if (activeImage) {
+        newState = { slideShowActive: true, activeImage };
+      } else {
+        newState = { slideShowActive: true };
+      }
+      this.setState(newState);
+      this.imageInterval = setInterval(() => this.changeImage(), 4000);
+    }
+  }
+
+  stopImageRotation(index) {
+    this.setState({ activeImage: index, slideShowActive: false });
+    clearInterval(this.imageInterval);
+  }
+
+  changeImage() {
+    const { activeImage } = this.state;
+    const nextImage = activeImage === this.imageCount ? 1 : activeImage + 1;
+    this.setState({ activeImage: nextImage });
+  }
+
   generateCarousel() {
     return homeCarouselData.map((image, index) => {
-      if (index === 0) {
-        return (
-          <CoverImage
-            key={`cover-image-${index}`} 
-            active={this.state.activeImage === index} 
-            src={image.src}
-            ref={this.initialImage}
-            onLoad={this.handleInitialLoad.bind(this)} 
-          />
-        );
-      } else {
-        return (
-          <CoverImage 
-            key={`cover-image-${index}`} 
-            active={this.state.activeImage === index}
-            src={image.src}
-          />
-        );
-      }
+      const { activeImage } = this.state;
+      const { src } = image;
+      return <CoverImage key={`cover-image-${image.id}`} active={activeImage === index} src={src} />;
     });
   }
 
-  render () {
-    return (
-      <Layout>
-        {this.generateCarousel()}
-        {/* <Caption active={this.state.activeImage !== 0}>
-          {homeCarouselData[this.state.activeImage] ? homeCarouselData[this.state.activeImage].caption : null}
-        </Caption> */}
-        <IntroDiv active={this.state.activeImage === 0}>
-          <h1 style={{ marginBottom: 0 }}>Heidi Hölting</h1>
-          <p style={{ marginTop: 0, textAlign: 'center' }}>Model</p>
-        </IntroDiv>
-        <Bullets 
-          imageCount={this.imageCount} 
-          active={this.state.activeImage !== 0}
-          activeImage={this.state.activeImage}
-          stopImageRotation={this.stopImageRotation.bind(this)}
+  renderBullets() {
+    const { activeImage, initialLoad } = this.state;
+    if (initialLoad) {
+      return (
+        <Bullets
+          imageCount={this.imageCount}
+          active={activeImage !== 0}
+          activeImage={activeImage}
+          stopImageRotation={index => this.stopImageRotation(index)}
         />
-      </Layout>
+      );
+    }
+    return null;
+  }
+
+  renderPlayPause() {
+    const { activeImage, initialLoad, slideShowActive } = this.state;
+    if (initialLoad) {
+      return (
+        <PlayPause
+          slideShowActive={slideShowActive}
+          slideShowInitialized={activeImage !== 0}
+          toggleSlideShow={() => this.toggleSlideShow()}
+        />
+      );
+    }
+    return null;
+  }
+
+  render() {
+    const { activeImage } = this.state;
+    return (
+      <React.Fragment>
+        {this.generateCarousel()}
+        <IntroDiv active={activeImage === 0} />
+        {this.renderBullets()}
+        {this.renderPlayPause()}
+      </React.Fragment>
     );
   }
 }
 
 export default Index;
-
-const IntroDiv = styled.div`
-  position: absolute;
-  bottom: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  fontSize: 2rem;
-  textAlign: center;
-  visibility: ${props => props.active ? 'visible' : 'hidden'};
-  opacity: ${props => props.active ? 1 : 0};
-  transition: ${props => props.active ? 'all 1000ms ease 200ms' : 'all 500ms ease'};
-`;
-
-// const Caption = styled.p`
-//   position: absolute;
-//   bottom: 0px;
-//   left: 20px;
-//   color: #000;
-//   font-weight: bold;
-//   visibility: ${props => props.active ? 'visible' : 'hidden'};
-// `;

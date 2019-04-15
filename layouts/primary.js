@@ -1,26 +1,22 @@
+import Head from 'next/head';
+import { withRouter } from 'next/router';
+
 import Header from '../includes/header';
-import { createGlobalStyle } from 'styled-components';
+import { capitalizeFirstLetter } from '../helpers/strings';
 
-const GlobalStyle = createGlobalStyle`
-  * {
-    box-sizing: border-box;
-  }
-  html, body {
-    width: 100%;
-    height: 100%;
-  }
-  body {
-    margin: 0;
-    padding: 0;
-  }
-`;
+const Layout = ({ children, router }) => {
+  const title = router.pathname.replace('/', '');
+  const capitalizedTitle = capitalizeFirstLetter(title);
 
-const Layout = ({ children }) => (
-  <React.Fragment>
-    <GlobalStyle />
-    <Header />
-    {children}
-  </React.Fragment>
-);
+  return (
+    <React.Fragment>
+      <Head>
+        <title>Heidi Hölting {title && `- ${capitalizedTitle}`}</title>
+      </Head>
+      <Header />
+      {children}
+    </React.Fragment>
+  );
+};
 
-export default Layout;
+export default withRouter(Layout);
