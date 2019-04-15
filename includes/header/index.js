@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { withRouter } from 'next/router';
+import Router, { withRouter } from 'next/router';
 
 import styled from 'styled-components';
 
@@ -17,6 +17,23 @@ class Header extends React.Component {
     this.state = {
       mobileNavActive: false
     };
+  }
+
+  componentDidMount() {
+    Router.events.on('routeChangeStart', () => {
+      const { mobileNavActive } = this.state;
+      if (mobileNavActive) {
+        this.timerCloseMobileMenu = setTimeout(() => {
+          this.setState({ mobileNavActive: false });
+        }, 200);
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    if (this.timerCloseMobileMenu) {
+      clearTimeout(this.timerCloseMobileMenu);
+    }
   }
 
   render() {

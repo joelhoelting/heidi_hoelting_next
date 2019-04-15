@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { mediaMin } from '../../../styles/mediaQueries';
 
 const Hamburger = ({ active, textColor, toggleMobileNav }) => {
-  console.log(textColor);
   return (
     <HamburgerDivContainer onClick={toggleMobileNav}>
       <HamburgerDiv>

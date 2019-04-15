@@ -1,7 +1,7 @@
-import CoverImage from '../components/CoverImage';
-import Bullets from '../components/Bullets';
-import PlayPause from '../components/PlayPause';
-import IntroDiv from '../components/IntroDiv';
+import CoverImage from '../components/pages/home/CoverImage';
+import Bullets from '../components/pages/home/Bullets';
+import PlayPause from '../components/pages/home/PlayPause';
+import IntroDiv from '../components/pages/home/IntroDiv';
 
 import homeCarouselData from '../data/homeCarouselData';
 
@@ -24,15 +24,21 @@ class Index extends React.Component {
     if (this.imageInterval) {
       this.stopImageRotation();
     }
+    if (this.timerInitialLoad) {
+      clearTimeout(this.timerInitialLoad);
+    }
+    if (this.timerStartImageRotation) {
+      clearTimeout(this.timerStartImageRotation);
+    }
   }
 
   handleInitialLoad() {
     const { initialLoad } = this.state;
     if (!initialLoad) {
-      setTimeout(() => {
+      this.timerInitialLoad = setTimeout(() => {
         this.setState({ initialLoad: true, activeImage: 0 });
       }, 300);
-      setTimeout(() => {
+      this.timerStartImageRotation = setTimeout(() => {
         this.startImageRotation(1);
       }, 4000);
     }
@@ -67,18 +73,16 @@ class Index extends React.Component {
   }
 
   changeImage() {
-    const currentImage = this.state.activeImage;
-    const activeImage = currentImage === this.imageCount ? 1 : currentImage + 1;
-    this.setState({ activeImage });
+    const { activeImage } = this.state;
+    const nextImage = activeImage === this.imageCount ? 1 : activeImage + 1;
+    this.setState({ activeImage: nextImage });
   }
 
   generateCarousel() {
     return homeCarouselData.map((image, index) => {
       const { activeImage } = this.state;
-      if (image.initialImage) {
-        return <CoverImage key={`cover-image-${image.id}`} active={activeImage === index} src={image.src} />;
-      }
-      return <CoverImage key={`cover-image-${image.id}`} active={activeImage === index} src={image.src} />;
+      const { src } = image;
+      return <CoverImage key={`cover-image-${image.id}`} active={activeImage === index} src={src} />;
     });
   }
 
@@ -112,10 +116,11 @@ class Index extends React.Component {
   }
 
   render() {
+    const { activeImage } = this.state;
     return (
       <React.Fragment>
         {this.generateCarousel()}
-        <IntroDiv active={this.state.activeImage === 0} />
+        <IntroDiv active={activeImage === 0} />
         {this.renderBullets()}
         {this.renderPlayPause()}
       </React.Fragment>

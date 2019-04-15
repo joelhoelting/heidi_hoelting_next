@@ -8,6 +8,12 @@ const ContainerStyles = createGlobalStyle`
       margin-top: 100px;
     `}
   }
+  .contact-container {
+    margin-top: 50px;
+    ${mediaMin.tabletLandscape`
+      margin-top: 0;
+    `}
+  }
 `;
 
 export default ContainerStyles;

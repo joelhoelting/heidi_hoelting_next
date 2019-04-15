@@ -1,1 +1,3 @@
-export const pages = ['gallery', 'about', 'contact'];
+const pages = ['gallery', 'about', 'contact'];
+
+export default pages;
