@@ -1,5 +1,12 @@
 {
-  "extends": ["airbnb", "prettier", "prettier/react", "plugin:jsx-a11y/recommended", "plugin:react/recommended"],
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react/recommended",
+    "eslint:recommended"
+  ],
   "plugins": ["prettier", "jsx-a11y"],
   "rules": {
     "react/jsx-filename-extension": [
@@ -9,7 +16,7 @@
       }
     ],
     "react/prop-types": 0,
-    "react/prefer-stateless-function": 0,
+    "react/prefer-stateless-function": 1,
     "react/jsx-no-undef": [2, { "allowGlobals": true }],
     "react/destructuring-assignment": 1,
     "no-underscore-dangle": 0,

@@ -1,16 +1,12 @@
 import styled from 'styled-components';
-import { mediaMin } from '../styles/mediaQueries';
+import { mediaMin } from '../../../styles/mediaQueries';
 
 const Bullets = ({ active, activeImage, imageCount, stopImageRotation }) => {
   const bullets = [];
   const bulletLength = imageCount;
   for (let index = 1; index <= bulletLength; index += 1) {
     bullets.push(
-      <Bullet
-        onClick={() => stopImageRotation(index)}
-        key={`image-bullet-${index}`}
-        active={activeImage === index}
-      />
+      <Bullet onClick={() => stopImageRotation(index)} key={`image-bullet-${index}`} active={activeImage === index} />
     );
   }
 

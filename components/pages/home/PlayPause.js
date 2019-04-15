@@ -1,19 +1,13 @@
 import styled from 'styled-components';
-import { mediaMax } from '../styles/mediaQueries';
+import { mediaMax } from '../../../styles/mediaQueries';
 
 const PlayPause = ({ slideShowActive, slideShowInitialized, toggleSlideShow }) => {
   return (
     <PlayPauseContainer slideShowInitialized={slideShowInitialized} onClick={toggleSlideShow}>
       {slideShowActive ? (
-        <img
-          alt="Pause button for home screen slideshow"
-          src="/static/images/icons/pause_button.png"
-        />
+        <img alt="Pause button for home screen slideshow" src="/static/images/icons/pause_button.png" />
       ) : (
-        <img
-          alt="Play button for home screen slideshow"
-          src="/static/images/icons/play_button.png"
-        />
+        <img alt="Play button for home screen slideshow" src="/static/images/icons/play_button.png" />
       )}
     </PlayPauseContainer>
   );

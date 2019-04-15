@@ -1,7 +1,7 @@
-import CoverImage from '../components/CoverImage';
-import Bullets from '../components/Bullets';
-import PlayPause from '../components/PlayPause';
-import IntroDiv from '../components/IntroDiv';
+import CoverImage from '../components/pages/home/CoverImage';
+import Bullets from '../components/pages/home/Bullets';
+import PlayPause from '../components/pages/home/PlayPause';
+import IntroDiv from '../components/pages/home/IntroDiv';
 
 import homeCarouselData from '../data/homeCarouselData';
 
@@ -81,10 +81,8 @@ class Index extends React.Component {
   generateCarousel() {
     return homeCarouselData.map((image, index) => {
       const { activeImage } = this.state;
-      if (image.initialImage) {
-        return <CoverImage key={`cover-image-${image.id}`} active={activeImage === index} src={image.src} />;
-      }
-      return <CoverImage key={`cover-image-${image.id}`} active={activeImage === index} src={image.src} />;
+      const { src } = image;
+      return <CoverImage key={`cover-image-${image.id}`} active={activeImage === index} src={src} />;
     });
   }
 

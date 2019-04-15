@@ -5,15 +5,13 @@ import { pages } from '../../../data/pages';
 import { capitalizeFirstLetter } from '../../../helpers/strings';
 import { mediaMin } from '../../../styles/mediaQueries';
 
-const MobileMenu = ({ active, toggleMobileNav }) => (
+const MobileMenu = ({ active }) => (
   <MobileMenuWrapper active={active}>
     <ul>
       {pages.map(page => (
         <li key={`page-${page}`}>
           <Link href={`/${page}`}>
-            <a onClick={toggleMobileNav} role="link" tabIndex={0}>
-              {capitalizeFirstLetter(page)}
-            </a>
+            <a>{capitalizeFirstLetter(page)}</a>
           </Link>
         </li>
       ))}
