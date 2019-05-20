@@ -38,7 +38,7 @@ const StyledNav = styled.nav`
       cursor: pointer;
       letter-spacing: 2px;
       color: ${props => props.textColor};
-      transition: color 300ms ease 200ms;
+      transition: color 300ms ease;
       a {
         position: relative;
         text-decoration: none;
