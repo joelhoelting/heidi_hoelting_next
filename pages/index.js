@@ -40,7 +40,7 @@ class Index extends React.Component {
       }, 300);
       this.timerStartImageRotation = setTimeout(() => {
         this.startImageRotation(1);
-      }, 4000);
+      }, 3000);
     }
   }
 

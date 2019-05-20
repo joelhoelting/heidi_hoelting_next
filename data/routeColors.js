@@ -3,7 +3,7 @@ const routeColors = {
     color: '#000'
   },
   gallery: {
-    color: '#000'
+    color: '#fff'
   },
   about: {
     color: '#fff'
