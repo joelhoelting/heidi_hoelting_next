@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const AboutWrapper = styled.div`
   height: 100%;
   width: 100%;
-  background-image: url('/static/images/pages/about/heidi_hoelting_black_background.jpg');
+  background-image: url('/static/images/pages/about/heidi_about_background.jpg');
   background-size: cover;
   background-position: center center;
   opacity: ${props => (!props.mounted ? 0 : 1)};

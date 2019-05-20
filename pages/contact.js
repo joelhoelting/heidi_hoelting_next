@@ -8,19 +8,33 @@ const ContactWrapper = styled.div`
   height: 100%;
   text-align: center;
   width: 100%;
+  background-image: url('/static/images/pages/contact/heidi_contact_background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top right;
+  display: flex;
+  align-items: flex-end;
+  opacity: ${props => (!props.mounted ? 0 : 1)};
+  transition: opacity 500ms ease;
   ${mediaMin.tablet`
-    display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
   `}
-  h1 {
-    margin: 0;
-  }
+
   form {
     margin: 0 auto;
     max-width: 90%;
     width: 600px;
+    opacity: ${props => (!props.mounted ? 0 : 1)};
+    transition: opacity 1000ms ease 1000ms;
+    h1 {
+      margin: 0;
+      display: none;
+      ${mediaMin.tablet`
+        display: initial;
+      `}
+    }
     label {
       display: block;
       height: 70px;
@@ -32,6 +46,7 @@ const ContactWrapper = styled.div`
         border-left: none;
         border-top: none;
         border-right: none;
+        border-radius: 0;
         color: #000;
         font-size: 1rem;
         height: 40px;
@@ -106,8 +121,15 @@ class Contact extends Component {
         nameValid: true,
         emailValid: true,
         textareaValid: true
-      }
+      },
+      mounted: false
     };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ mounted: true });
+    }, 200);
   }
 
   handleChange(e) {
@@ -125,8 +147,8 @@ class Contact extends Component {
         subject: `HeidiHoelting.com: ${name}`,
         from: 'HeidiHoelting.com',
         message: `Heidi, you have a new email from: ${email}\n\n${textarea}`
-      }
-      
+      };
+
       fetch('http://localhost:3001/email/send', {
         method: 'POST',
         body: JSON.stringify(emailBody), // data can be `string` or {object}!
@@ -165,12 +187,12 @@ class Contact extends Component {
   }
 
   render() {
-    const { name, email, textarea, errors } = this.state;
+    const { name, email, textarea, errors, mounted } = this.state;
 
     return (
-      <ContactWrapper className="contact-container" errors={errors}>
-        <h1>Contact</h1>
+      <ContactWrapper className="contact-container" errors={errors} mounted={mounted}>
         <form onSubmit={e => this.handleSubmit(e)}>
+          <h1>Contact</h1>
           <label htmlFor="email">
             <input
               className={email ? 'filled' : null}

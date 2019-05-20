@@ -9,9 +9,9 @@ const ContainerStyles = createGlobalStyle`
     `}
   }
   .contact-container {
-    margin-top: 50px;
+    padding-top: 80px;
     ${mediaMin.tabletLandscape`
-      margin-top: 0;
+      padding-top: 0;
     `}
   }
 `;

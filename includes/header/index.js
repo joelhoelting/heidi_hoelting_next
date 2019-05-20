@@ -40,7 +40,7 @@ class Header extends React.Component {
     const { mobileNavActive } = this.state;
     const { router } = this.props;
     const route = router.pathname.replace('/', '').toLowerCase() || 'home';
-    const textColor = routerColors[route].color;
+    const textColor = routerColors[route] ? routerColors[route].color : undefined;
 
     return (
       <HeaderWrapper mobileNavActive={mobileNavActive} textColor={textColor}>
