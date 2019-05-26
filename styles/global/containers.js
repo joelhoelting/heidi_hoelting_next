@@ -3,15 +3,11 @@ import { mediaMin } from '../mediaQueries';
 
 const ContainerStyles = createGlobalStyle`
   .container {
-    margin-top: 50px;
+    width: calc(100% - 40px);
+    margin: 50px auto 0;
     ${mediaMin.tabletLandscape`
-      margin-top: 100px;
-    `}
-  }
-  .contact-container {
-    padding-top: 80px;
-    ${mediaMin.tabletLandscape`
-      padding-top: 0;
+      margin: 100px auto 0;
+      width: calc(100% - 80px);
     `}
   }
 `;

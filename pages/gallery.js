@@ -4,8 +4,8 @@ const GalleryWrapper = styled.div``;
 
 const Gallery = () => {
   return (
-    <GalleryWrapper>
-      <h1>Hello</h1>
+    <GalleryWrapper className="container">
+      <h1>Gallery</h1>
     </GalleryWrapper>
   );
 };

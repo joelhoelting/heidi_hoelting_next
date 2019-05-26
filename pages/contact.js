@@ -16,7 +16,7 @@ const ContactWrapper = styled.div`
   align-items: flex-end;
   opacity: ${props => (!props.mounted ? 0 : 1)};
   transition: opacity 500ms ease;
-  ${mediaMin.tablet`
+  ${mediaMin.tabletLandscape`
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -27,11 +27,11 @@ const ContactWrapper = styled.div`
     max-width: 90%;
     width: 600px;
     opacity: ${props => (!props.mounted ? 0 : 1)};
-    transition: opacity 1000ms ease 1000ms;
+    transition: opacity 500ms ease 500ms;
     h1 {
       margin: 0;
       display: none;
-      ${mediaMin.tablet`
+      ${mediaMin.tabletLandscape`
         display: initial;
       `}
     }
@@ -107,6 +107,13 @@ const ContactWrapper = styled.div`
       }
     }
   }
+  img.instagram-logo {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      width: 40px;
+      cursor: pointer;
+    }
 `;
 
 class Contact extends Component {
@@ -190,7 +197,7 @@ class Contact extends Component {
     const { name, email, textarea, errors, mounted } = this.state;
 
     return (
-      <ContactWrapper className="contact-container" errors={errors} mounted={mounted}>
+      <ContactWrapper errors={errors} mounted={mounted}>
         <form onSubmit={e => this.handleSubmit(e)}>
           <h1>Contact</h1>
           <label htmlFor="email">
@@ -223,6 +230,9 @@ class Contact extends Component {
           />
           <button type="submit">SEND</button>
         </form>
+        <a href="https://www.instagram.com/heidi_c_nyc/" target="_blank" rel="noopener noreferrer">
+          <img className="instagram-logo" src="/static/images/logos/instagram_black.svg" alt="instagram_logo" />
+        </a>
       </ContactWrapper>
     );
   }
