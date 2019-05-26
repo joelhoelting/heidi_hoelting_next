@@ -110,124 +110,124 @@ const galleryArray = [
     src: 'heidi_hoelting_cuba_one_arm_up',
     size: 'wide',
     imageType: 'large',
-    order: 37
+    order: 18
   },
   {
     src: 'heidi_hoelting_one_piece_1',
     size: 'tall',
     imageType: 'small',
-    order: 18
+    order: 19
   },
   {
     src: 'heidi_hoelting_maroon_jacket_1',
     size: 'tall',
     imageType: 'small',
-    order: 19
+    order: 20
   },
   {
     src: 'heidi_hoelting_chain_link_2',
     size: 'tall',
     imageType: 'small',
-    order: 20
+    order: 21
   },
   {
     src: 'heidi_hoelting_tiled_wall',
     size: 'wide',
     imageType: 'large',
-    order: 21,
+    order: 22,
     objectPosition: 'top center'
   },
   {
     src: 'heidi_hoelting_black_top_red_skirt_1',
     size: 'tall',
     imageType: 'small',
-    order: 22
+    order: 23
   },
   {
     src: 'heidi_hoelting_hat',
     size: 'square-small',
     imageType: 'small',
-    order: 23
+    order: 24
   },
   {
     src: 'heidi_hoelting_fifth_avenue',
     size: 'square',
     imageType: 'large',
-    order: 24
+    order: 25
   },
   {
     src: 'heidi_hoelting_maroon_jacket_2',
     size: 'square-small',
     imageType: 'small',
-    order: 25,
+    order: 26,
     objectPosition: 'top center'
   },
   {
     src: 'heidi_hoelting_distorted_street_1',
     size: 'tall',
     imageType: 'large',
-    order: 26
+    order: 27
   },
   {
     src: 'heidi_hoelting_puffy_shirt',
     size: 'tall',
     imageType: 'small',
-    order: 27
+    order: 28
   },
   {
     src: 'heidi_hoelting_wedding_dress_headshot',
     size: 'tall',
     imageType: 'small',
-    order: 28
+    order: 29
   },
   {
     src: 'heidi_hoelting_wedding_dress',
     size: 'tall',
     imageType: 'small',
-    order: 29
+    order: 30
   },
   {
     src: 'heidi_hoelting_purple_makeup',
     size: 'tall',
     imageType: 'small',
-    order: 30
+    order: 31
   },
   {
     src: 'heidi_hoelting_black_dress_2',
     size: 'tall',
     imageType: 'small',
-    order: 31
+    order: 32
   },
   {
     src: 'heidi_hoelting_green_shimmering_dress',
     size: 'tall',
     imageType: 'small',
-    order: 32
+    order: 33
   },
   {
     src: 'heidi_hoelting_black_dress_1',
     size: 'square-small',
     imageType: 'small',
-    order: 33,
+    order: 34,
     objectPosition: 'top center'
   },
   {
     src: 'heidi_hoelting_blonde',
     size: 'square',
     imageType: 'small',
-    order: 34
+    order: 35
   },
   {
     src: 'heidi_hoelting_bra',
     size: 'tall',
     imageType: 'small',
-    order: 35
+    order: 36
   },
   {
     src: 'heidi_hoelting_faded_white',
     size: 'tall',
     imageType: 'large',
-    order: 36
+    order: 37
   },
   {
     src: 'heidi_hoelting_makeup_2',
