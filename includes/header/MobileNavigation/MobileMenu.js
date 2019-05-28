@@ -5,22 +5,6 @@ import pages from '../../../data/pages';
 import { capitalizeFirstLetter } from '../../../helpers/strings';
 import { mediaMin } from '../../../styles/mediaQueries';
 
-const MobileMenu = ({ active }) => (
-  <MobileMenuWrapper active={active}>
-    <ul>
-      {pages.map(page => (
-        <li key={`page-${page}`}>
-          <Link href={`/${page}`}>
-            <a>{capitalizeFirstLetter(page)}</a>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  </MobileMenuWrapper>
-);
-
-export default MobileMenu;
-
 const MobileMenuWrapper = styled.div`
   background: #fff;
   position: fixed;
@@ -48,14 +32,30 @@ const MobileMenuWrapper = styled.div`
       opacity: ${props => (props.active ? 1 : 0)};
       text-transform: uppercase;
       &:nth-child(1) {
-        ${props => props.active && 'transition: opacity 300ms ease 300ms'};
+        ${props => props.active && 'transition: opacity 1000ms ease 200ms'};
       }
       &:nth-child(2) {
-        ${props => props.active && 'transition: opacity 300ms ease 500ms'};
+        ${props => props.active && 'transition: opacity 1000ms ease 300ms'};
       }
       &:nth-child(3) {
-        ${props => props.active && 'transition: opacity 300ms ease 700ms'};
+        ${props => props.active && 'transition: opacity 1000ms ease 400ms'};
       }
     }
   }
 `;
+
+const MobileMenu = ({ active }) => (
+  <MobileMenuWrapper active={active}>
+    <ul>
+      {pages.map(page => (
+        <li key={`page-${page}`}>
+          <Link href={`/${page}`}>
+            <a>{capitalizeFirstLetter(page)}</a>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </MobileMenuWrapper>
+);
+
+export default MobileMenu;

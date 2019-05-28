@@ -7,13 +7,15 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "export": "next export"
+    "export": "next export",
+    "deploy": "npm run build && npm run export && aws s3 cp out s3://heidihoelting.dev.com/ --recursive"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "next": "^8.0.3",
+    "prop-types": "^15.7.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "styled-components": "^4.1.3"

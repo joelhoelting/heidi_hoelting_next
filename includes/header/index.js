@@ -10,57 +10,8 @@ import DesktopNavigation from './DesktopNavigation';
 import { mediaMin } from '../../styles/mediaQueries';
 import routerColors from '../../data/routeColors';
 
-class Header extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      mobileNavActive: false
-    };
-  }
-
-  componentDidMount() {
-    Router.events.on('routeChangeStart', () => {
-      const { mobileNavActive } = this.state;
-      if (mobileNavActive) {
-        this.timerCloseMobileMenu = setTimeout(() => {
-          this.setState({ mobileNavActive: false });
-        }, 200);
-      }
-    });
-  }
-
-  componentWillUnmount() {
-    if (this.timerCloseMobileMenu) {
-      clearTimeout(this.timerCloseMobileMenu);
-    }
-  }
-
-  render() {
-    const { mobileNavActive } = this.state;
-    const { router } = this.props;
-    const route = router.pathname.replace('/', '').toLowerCase() || 'home';
-    const textColor = routerColors[route].color;
-
-    return (
-      <HeaderWrapper mobileNavActive={mobileNavActive} textColor={textColor}>
-        <Link href="/">
-          <a className="main-logo">Heidi Hölting</a>
-        </Link>
-        <MobileNavigation
-          textColor={textColor}
-          mobileNavActive={mobileNavActive}
-          toggleMobileNav={() => this.setState({ mobileNavActive: !mobileNavActive })}
-        />
-        <DesktopNavigation textColor={textColor} />
-      </HeaderWrapper>
-    );
-  }
-}
-
-export default withRouter(Header);
-
 const HeaderWrapper = styled.header`
+  ${props => (props.route === 'gallery' ? 'background: white' : null)};
   position: fixed;
   left: 0;
   top: 0;
@@ -109,3 +60,53 @@ const HeaderWrapper = styled.header`
     `}
   }
 `;
+
+class Header extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      mobileNavActive: false
+    };
+  }
+
+  componentDidMount() {
+    Router.events.on('routeChangeStart', () => {
+      const { mobileNavActive } = this.state;
+      if (mobileNavActive) {
+        this.timerCloseMobileMenu = setTimeout(() => {
+          this.setState({ mobileNavActive: false });
+        }, 200);
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    if (this.timerCloseMobileMenu) {
+      clearTimeout(this.timerCloseMobileMenu);
+    }
+  }
+
+  render() {
+    const { mobileNavActive } = this.state;
+    const { router } = this.props;
+    const route = router.pathname.replace('/', '').toLowerCase() || 'home';
+    const textColor = routerColors[route] ? routerColors[route].color : undefined;
+
+    return (
+      <HeaderWrapper mobileNavActive={mobileNavActive} textColor={textColor} route={route}>
+        <Link href="/">
+          <a className="main-logo">Heidi Hölting</a>
+        </Link>
+        <MobileNavigation
+          textColor={textColor}
+          mobileNavActive={mobileNavActive}
+          toggleMobileNav={() => this.setState({ mobileNavActive: !mobileNavActive })}
+        />
+        <DesktopNavigation textColor={textColor} />
+      </HeaderWrapper>
+    );
+  }
+}
+
+export default withRouter(Header);

@@ -1,27 +1,10 @@
 import Link from 'next/link';
+import { withRouter } from 'next/router';
 import styled from 'styled-components';
 
 import pages from '../../../data/pages';
 import { capitalizeFirstLetter } from '../../../helpers/strings';
-import { mediaMax } from '../../../styles/mediaQueries';
-
-const DesktopNavigation = ({ textColor }) => {
-  return (
-    <StyledNav textColor={textColor}>
-      <ul>
-        {pages.map(page => (
-          <li key={`page-${page}`}>
-            <Link href={`/${page}`}>
-              <a>{capitalizeFirstLetter(page)}</a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </StyledNav>
-  );
-};
-
-export default DesktopNavigation;
+import { mediaMax, mediaMin } from '../../../styles/mediaQueries';
 
 const StyledNav = styled.nav`
   ${mediaMax.tabletLandscape`
@@ -38,7 +21,7 @@ const StyledNav = styled.nav`
       cursor: pointer;
       letter-spacing: 2px;
       color: ${props => props.textColor};
-      transition: color 300ms ease 200ms;
+      transition: color 400ms ease;
       a {
         position: relative;
         text-decoration: none;
@@ -58,9 +41,34 @@ const StyledNav = styled.nav`
       }
       a:hover:before {
         visibility: visible;
-        -webkit-transform: scaleX(1);
         transform: scaleX(1);
+      }
+      a.active:before {
+        ${mediaMin.tabletLandscape`
+          visibility: visible;
+          transform: scaleX(1);
+        `}
       }
     }
   }
 `;
+
+const DesktopNavigation = ({ textColor, router }) => {
+  const route = router.pathname.replace('/', '');
+
+  return (
+    <StyledNav textColor={textColor}>
+      <ul>
+        {pages.map(page => (
+          <li key={`page-${page}`}>
+            <Link href={`/${page}`}>
+              <a className={route === page ? 'active' : null}>{capitalizeFirstLetter(page)}</a>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </StyledNav>
+  );
+};
+
+export default withRouter(DesktopNavigation);

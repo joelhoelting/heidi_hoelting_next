@@ -40,7 +40,7 @@ class Index extends React.Component {
       }, 300);
       this.timerStartImageRotation = setTimeout(() => {
         this.startImageRotation(1);
-      }, 4000);
+      }, 3000);
     }
   }
 
@@ -63,7 +63,7 @@ class Index extends React.Component {
         newState = { slideShowActive: true };
       }
       this.setState(newState);
-      this.imageInterval = setInterval(() => this.changeImage(), 4000);
+      this.imageInterval = setInterval(() => this.changeImage(), 5000);
     }
   }
 
