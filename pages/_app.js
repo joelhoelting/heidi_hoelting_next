@@ -1,7 +1,7 @@
 import App, { Container } from 'next/app';
 
 import Layout from '../layouts/primary';
-import { ContainerStyle, GlobalStyle, TypographyStyle, AnimationStyle } from '../styles/global/_module';
+import { ContainerStyle, GlobalStyle, TypographyStyle, AnimationStyle } from '../styles/_module';
 
 export default class MyApp extends App {
   render() {

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { SmallImage, LargeImage } from '../components/responsive_images/_module';
+import ResponsiveImage from '../components/responsive_image';
 import galleryArray from '../data/galleryData';
 
 const GalleryGridWrapper = styled.div`
@@ -41,20 +41,18 @@ const GridItem = styled.div`
   }
 `;
 
-const components = {
-  small: SmallImage,
-  large: LargeImage
-};
-
 const renderGallery = () => {
   return galleryArray.map(item => {
-    const { src, size, imageType, objectPosition, order } = item;
-
-    const ImageComponent = components[imageType];
+    const { src, size, objectPosition, order } = item;
 
     return (
       <GridItem key={`gallery-item-${order}`} className={size}>
-        <ImageComponent src={`/static/images/pages/gallery/${src}`} objectFit objectPosition={objectPosition} />
+        <ResponsiveImage
+          type="small"
+          src={`/static/images/pages/gallery/${src}`}
+          objectFit
+          objectPosition={objectPosition}
+        />
       </GridItem>
     );
   });

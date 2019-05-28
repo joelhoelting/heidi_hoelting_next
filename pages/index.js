@@ -63,7 +63,7 @@ class Index extends React.Component {
         newState = { slideShowActive: true };
       }
       this.setState(newState);
-      this.imageInterval = setInterval(() => this.changeImage(), 4000);
+      this.imageInterval = setInterval(() => this.changeImage(), 5000);
     }
   }
 
