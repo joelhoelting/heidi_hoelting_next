@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import ResponsiveImage from '../components/responsive_image';
+import { mediaMin } from '../styles/mediaQueries';
+
 import galleryArray from '../data/galleryData';
 
 const GalleryGridWrapper = styled.div`
@@ -8,7 +10,16 @@ const GalleryGridWrapper = styled.div`
   grid-template-columns: auto;
   grid-auto-flow: row dense;
   gap: 16px;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
+  ${mediaMin.tablet`
+    grid-template-columns: 1fr 1fr;
+  `}\
+  ${mediaMin.desktop`
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  `}
+  ${mediaMin.desktopLarge`
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  `}
 `;
 
 const GridItem = styled.div`
