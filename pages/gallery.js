@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+
+import Context from '../config/Context';
 import ResponsiveImage from '../components/responsive_image';
 import { mediaMin } from '../styles/mediaQueries';
 
@@ -20,6 +22,36 @@ const GalleryGridWrapper = styled.div`
   ${mediaMin.desktopLarge`
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   `}
+  .gallery-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    background: rgba(0,0,0,.9);
+    transition: all 200ms ease;
+    visibility: ${props => (props.active ? 'visible' : 'hidden')};
+    opacity: ${props => (props.active ? 1 : 0)};
+    .close-overlay {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      height: 60px;
+      width: 60px;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      img {
+        height: 40px;
+        width: 40px;
+      }
+    }
+  }
 `;
 
 const GridItem = styled.div`
@@ -44,6 +76,19 @@ const GridItem = styled.div`
     grid-row-end: span 1;
     grid-column-end: span 1;
   }
+  .picture-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: none;
+    cursor: pointer;
+    transition: background 100ms ease;
+    &:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+  }
   picture {
     position: absolute;
     top: 0;
@@ -52,25 +97,57 @@ const GridItem = styled.div`
   }
 `;
 
-const renderGallery = () => {
-  return galleryArray.map(item => {
-    const { src, size, objectPosition, order } = item;
+class Gallery extends React.Component {
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      overlayActive: true
+    };
+  }
+
+  toggleOverlay(context) {
+    const { overlayActive } = this.state;
+
+    context.toggleScrollBar();
+    this.setState({ overlayActive: !overlayActive });
+  }
+
+  renderGallery(context) {
+    return galleryArray.map(item => {
+      const { src, size, objectPosition, order } = item;
+
+      return (
+        <GridItem key={`gallery-item-${order}`} className={size}>
+          <ResponsiveImage
+            type="small"
+            src={`/static/images/pages/gallery/${src}`}
+            objectFit
+            objectPosition={objectPosition}
+          />
+          <div className="picture-overlay" onClick={() => this.toggleOverlay(context)} />
+        </GridItem>
+      );
+    });
+  }
+
+  render() {
+    const { overlayActive } = this.state;
     return (
-      <GridItem key={`gallery-item-${order}`} className={size}>
-        <ResponsiveImage
-          type="small"
-          src={`/static/images/pages/gallery/${src}`}
-          objectFit
-          objectPosition={objectPosition}
-        />
-      </GridItem>
+      <Context.Consumer>
+        {context => (
+          <GalleryGridWrapper className="container" active={overlayActive}>
+            <div className="gallery-overlay">
+              <button alt="Close overlay button" className="close-overlay" onClick={() => this.toggleOverlay(context)}>
+                <img src="/static/images/icons/close.svg" />
+              </button>
+            </div>
+            {this.renderGallery(context)}
+          </GalleryGridWrapper>
+        )}
+      </Context.Consumer>
     );
-  });
-};
-
-const Gallery = () => {
-  return <GalleryGridWrapper className="container">{renderGallery()}</GalleryGridWrapper>;
-};
+  }
+}
 
 export default Gallery;
