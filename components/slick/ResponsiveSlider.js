@@ -4,6 +4,33 @@ import styled from 'styled-components';
 
 import ResponsiveImage from '../images/ResponsiveImage';
 
+const SliderArrowWrapper = styled.div`
+  z-index: 10;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: none;
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  img {
+    height: 20px;
+    width: 20px;
+  }
+`;
+
+const SliderArrow = props => {
+  const { className, onClick, src } = props;
+  return (
+    <SliderArrowWrapper aria-hidden="true" className={className} onClick={onClick}>
+      <img className={`${className}-image`} alt="Gallery next arrow" src={src} />
+    </SliderArrowWrapper>
+  );
+};
+
 const SliderWrapper = styled.div`
   height: 100%;
   .gallery-slider {
@@ -11,6 +38,13 @@ const SliderWrapper = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+  .slick-next::before {
+    content: none;
+  }
+
+  .slick-prev::before {
+    content: none;
   }
 `;
 
@@ -29,6 +63,7 @@ class ResponsiveSlider extends Component {
       const { imageType, src } = img;
       return (
         <ResponsiveImage
+          className="carousel-image"
           centered
           maxHeight="800px"
           key={`carousel-image-${img.order}`}
@@ -48,6 +83,8 @@ class ResponsiveSlider extends Component {
       slidesToShow: 1,
       slidesToScroll: 1,
       className: 'gallery-slider',
+      prevArrow: <SliderArrow src="/static/images/icons/left_arrow.svg" />,
+      nextArrow: <SliderArrow src="/static/images/icons/right_arrow.svg" />,
       afterChange: index => {
         this.setState({
           currentIndex: index

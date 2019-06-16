@@ -38,10 +38,10 @@ const Bullet = styled.button`
   border: 0;
   border-radius: 50%;
   cursor: pointer;
-  height: 15px;
+  height: 8px;
+  width: 8px;
   margin: 0 10px;
   padding: 5px;
-  width: 15px;
   transition: background 300ms ease;
 
   ${mediaMin.tabletLandscape`

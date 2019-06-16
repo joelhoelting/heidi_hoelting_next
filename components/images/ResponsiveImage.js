@@ -15,7 +15,18 @@ const PictureWrapper = styled.picture`
   }
 `;
 
-const ResponsiveImage = ({ imageType, alt, ext, src, centered, maxHeight, objectFit, objectPosition, width }) => {
+const ResponsiveImage = ({
+  imageType,
+  alt,
+  ext,
+  src,
+  centered,
+  className,
+  maxHeight,
+  objectFit,
+  objectPosition,
+  width
+}) => {
   ext = ext || 'jpg';
 
   const srcSetObj = {
@@ -38,7 +49,7 @@ const ResponsiveImage = ({ imageType, alt, ext, src, centered, maxHeight, object
       width={width}
     >
       <source srcSet={srcSetObj[imageType].string} />
-      <img src={srcSetObj[imageType].default} alt={alt} />
+      <img className={className ? className : ''} src={srcSetObj[imageType].default} alt={alt} />
     </PictureWrapper>
   );
 };

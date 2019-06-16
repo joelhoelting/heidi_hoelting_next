@@ -15,9 +15,12 @@ const GalleryGridWrapper = styled.div`
   gap: 16px;
   grid-template-columns: 1fr;
   padding-bottom: 100px;
-  ${mediaMin.tablet`
+  ${mediaMin.phoneXL`
     grid-template-columns: 1fr 1fr;
-  `}\
+  `}
+  ${mediaMin.tablet`
+    grid-template-columns: 1fr 1fr 1fr;
+  `}
   ${mediaMin.desktop`
     grid-template-columns: 1fr 1fr 1fr 1fr;
   `}
@@ -104,17 +107,24 @@ class Gallery extends React.Component {
 
     this.state = {
       carousel: {
-        active: false,
+        active: true,
         currentIndex: undefined
       }
     };
   }
 
-  toggleOverlay(context, index = undefined) {
-    const { carousel } = this.state;
-    const { active } = carousel;
+  toggleOverlay(event = undefined, context, index = undefined) {
+    let carouselImageClicked = event.target.classList.contains('carousel-image');
+    let carouselArrowClicked = event.target.classList.contains('slick-arrow');
+
+    if (carouselImageClicked || carouselArrowClicked) {
+      return;
+    }
 
     context.toggleScrollBar();
+
+    const { carousel } = this.state;
+    const { active } = carousel;
 
     const newState = {
       active: !active,
@@ -137,7 +147,7 @@ class Gallery extends React.Component {
             objectPosition={objectPosition}
             width="100%"
           />
-          <div className="picture-overlay" aria-hidden="true" onClick={() => this.toggleOverlay(context, idx)} />
+          <div className="picture-overlay" aria-hidden="true" onClick={e => this.toggleOverlay(e, context, idx)} />
         </GridItem>
       );
     });
@@ -150,14 +160,9 @@ class Gallery extends React.Component {
       <Context.Consumer>
         {context => (
           <GalleryGridWrapper className="container" active={active}>
-            <div className="gallery-overlay">
+            <div className="gallery-overlay" aria-hidden="true" onClick={e => this.toggleOverlay(e, context)}>
               <ResponsiveSlider imgArray={galleryArray} currentIndex={currentIndex} />
-              <div
-                alt="Close overlay button"
-                aria-hidden="true"
-                className="close-overlay"
-                onClick={() => this.toggleOverlay(context)}
-              >
+              <div alt="Close overlay button" aria-hidden="true" className="close-overlay">
                 <img aria-hidden="true" alt="Close overlay icon" src="/static/images/icons/close.svg" />
               </div>
             </div>
