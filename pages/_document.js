@@ -17,6 +17,7 @@ export default class MyDocument extends Document {
       <html lang="en-US">
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta charSet="UTF-8" />
           <link href="https://fonts.googleapis.com/css?family=Alegreya|Philosopher" rel="stylesheet" />
           <link rel="apple-touch-icon" sizes="180x180" href="../static/favicon/apple-touch-icon.png" />
           <link rel="icon" type="image/png" sizes="32x32" href="../static/favicon/favicon-32x32.png" />

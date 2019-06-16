@@ -1,6 +1,9 @@
 import App, { Container } from 'next/app';
-import ContextProvider from '../provider/ContextProvider';
 
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
+import ContextProvider from '../provider/ContextProvider';
 import Layout from '../layouts/primary';
 import { ContainerStyle, GlobalStyle, TypographyStyle, AnimationStyle } from '../styles/_module';
 

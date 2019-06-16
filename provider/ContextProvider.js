@@ -10,9 +10,13 @@ class ContextProvider extends React.Component {
   }
 
   toggleScrollBar() {
-    let currentOverflowY = this.body.style.overflowY;
+    setTimeout(() => {
+      let currentOverflowY = document.querySelector('body').style.overflowY;
 
-    currentOverflowY === 'hidden' ? (this.body.style.overflowY = 'visible') : (this.body.style.overflowY = 'hidden');
+      currentOverflowY === 'hidden'
+        ? (document.querySelector('body').style.overflowY = 'visible')
+        : (document.querySelector('body').style.overflowY = 'hidden');
+    }, 0);
   }
 
   render() {

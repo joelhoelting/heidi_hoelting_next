@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 import Context from '../config/Context';
-import ResponsiveImage from '../components/responsive_image';
+import ResponsiveSlider from '../components/slick/ResponsiveSlider';
+import ResponsiveImage from '../components/images/ResponsiveImage';
 import { mediaMin } from '../styles/mediaQueries';
 
 import galleryArray from '../data/galleryData';
@@ -13,6 +14,7 @@ const GalleryGridWrapper = styled.div`
   grid-auto-flow: row dense;
   gap: 16px;
   grid-template-columns: 1fr;
+  padding-bottom: 100px;
   ${mediaMin.tablet`
     grid-template-columns: 1fr 1fr;
   `}\
@@ -37,18 +39,17 @@ const GalleryGridWrapper = styled.div`
       position: absolute;
       top: 20px;
       right: 20px;
-      height: 60px;
-      width: 60px;
+      height: 40px;
+      width: 40px;
       cursor: pointer;
       padding: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       background: none;
-      border: none;
       img {
-        height: 40px;
-        width: 40px;
+        height: 25px;
+        width: 25px;
       }
     }
   }
@@ -102,45 +103,63 @@ class Gallery extends React.Component {
     super(props);
 
     this.state = {
-      overlayActive: true
+      carousel: {
+        active: false,
+        currentIndex: undefined
+      }
     };
   }
 
-  toggleOverlay(context) {
-    const { overlayActive } = this.state;
+  toggleOverlay(context, index = undefined) {
+    const { carousel } = this.state;
+    const { active } = carousel;
 
     context.toggleScrollBar();
-    this.setState({ overlayActive: !overlayActive });
+
+    const newState = {
+      active: !active,
+      currentIndex: index
+    };
+
+    this.setState({ carousel: newState });
   }
 
   renderGallery(context) {
-    return galleryArray.map(item => {
+    return galleryArray.map((item, idx) => {
       const { src, size, objectPosition, order } = item;
 
       return (
         <GridItem key={`gallery-item-${order}`} className={size}>
           <ResponsiveImage
-            type="small"
+            imageType="small"
             src={`/static/images/pages/gallery/${src}`}
             objectFit
             objectPosition={objectPosition}
+            width="100%"
           />
-          <div className="picture-overlay" onClick={() => this.toggleOverlay(context)} />
+          <div className="picture-overlay" aria-hidden="true" onClick={() => this.toggleOverlay(context, idx)} />
         </GridItem>
       );
     });
   }
 
   render() {
-    const { overlayActive } = this.state;
+    const { carousel } = this.state;
+    const { active, currentIndex } = carousel;
     return (
       <Context.Consumer>
         {context => (
-          <GalleryGridWrapper className="container" active={overlayActive}>
+          <GalleryGridWrapper className="container" active={active}>
             <div className="gallery-overlay">
-              <button alt="Close overlay button" className="close-overlay" onClick={() => this.toggleOverlay(context)}>
-                <img src="/static/images/icons/close.svg" />
-              </button>
+              <ResponsiveSlider imgArray={galleryArray} currentIndex={currentIndex} />
+              <div
+                alt="Close overlay button"
+                aria-hidden="true"
+                className="close-overlay"
+                onClick={() => this.toggleOverlay(context)}
+              >
+                <img aria-hidden="true" alt="Close overlay icon" src="/static/images/icons/close.svg" />
+              </div>
             </div>
             {this.renderGallery(context)}
           </GalleryGridWrapper>
