@@ -8,15 +8,13 @@ import { mediaMin } from '../styles/mediaQueries';
 import galleryArray from '../data/galleryData';
 
 const GalleryGridWrapper = styled.div`
-  display: grid;
-  grid-column: 1 / auto;
-  grid-template-columns: auto;
-  grid-auto-flow: row dense;
-  gap: 16px;
-  grid-template-columns: 1fr;
-  padding-bottom: 100px;
+  padding-bottom: 50px;
   ${mediaMin.phoneXL`
+    display: grid;
+    grid-column: 1 / auto;
     grid-template-columns: 1fr 1fr;
+    grid-auto-flow: row dense;
+    gap: 16px;
   `}
   ${mediaMin.tablet`
     grid-template-columns: 1fr 1fr 1fr;
@@ -41,7 +39,7 @@ const GalleryGridWrapper = styled.div`
     .close-overlay {
       position: absolute;
       top: 20px;
-      right: 20px;
+      right: 12px;
       height: 40px;
       width: 40px;
       cursor: pointer;
@@ -60,27 +58,40 @@ const GalleryGridWrapper = styled.div`
 
 const GridItem = styled.div`
   position: relative;
+  margin-bottom: 16px;
+  ${mediaMin.phoneXL`
+    margin-bottom: initial;
+  `}
   &.tall {
-    padding-top: 200%;
-    grid-row-end: span 2;
-    grid-column-end: span 1;
+    ${mediaMin.phoneXL`
+      padding-top: 200%;
+      grid-row-end: span 2;
+      grid-column-end: span 1;
+    `}
   }
   &.wide {
-    padding-top: 50%;
-    grid-row-end: span 1;
-    grid-column-end: span 2;
+    ${mediaMin.phoneXL`
+      padding-top: 50%;
+      grid-row-end: span 1;
+      grid-column-end: span 2;
+    `}
   }
   &.square {
-    padding-top: 100%;
-    grid-row-end: span 2;
-    grid-column-end: span 2;
+    ${mediaMin.phoneXL`
+      padding-top: 100%;
+      grid-row-end: span 2;
+      grid-column-end: span 2;
+    `}
   }
   &.square-small {
-    padding-top: 100%;
-    grid-row-end: span 1;
-    grid-column-end: span 1;
+    ${mediaMin.phoneXL`
+      padding-top: 100%;
+      grid-row-end: span 1;
+      grid-column-end: span 1;
+    `}
   }
   .picture-overlay {
+    border-radius: 5px;
     position: absolute;
     top: 0;
     left: 0;
@@ -94,11 +105,28 @@ const GridItem = styled.div`
     }
   }
   picture {
-    position: absolute;
-    top: 0;
-    left: 0;
     max-width: 100%;
+    ${mediaMin.phoneXL`
+      position: absolute;
+      top: 0;
+      left: 0;
+    `}
+    img {
+      border-radius: 5px;
+    }
   }
+`;
+
+const LegalDisclaimer = styled.p`
+  font-size: 10px;
+  text-align: center;
+  padding-bottom: 40px;
+  ${mediaMin.phone`
+    font-size: 12px;
+  `}
+  ${mediaMin.tablet`
+    font-size: 16px;
+  `}
 `;
 
 class Gallery extends React.Component {
@@ -107,7 +135,7 @@ class Gallery extends React.Component {
 
     this.state = {
       carousel: {
-        active: true,
+        active: false,
         currentIndex: undefined
       }
     };
@@ -136,12 +164,12 @@ class Gallery extends React.Component {
 
   renderGallery(context) {
     return galleryArray.map((item, idx) => {
-      const { src, size, objectPosition, order } = item;
+      const { imageType, src, size, objectPosition, order } = item;
 
       return (
         <GridItem key={`gallery-item-${order}`} className={size}>
           <ResponsiveImage
-            imageType="small"
+            imageType={imageType}
             src={`/static/images/pages/gallery/${src}`}
             objectFit
             objectPosition={objectPosition}
@@ -159,15 +187,18 @@ class Gallery extends React.Component {
     return (
       <Context.Consumer>
         {context => (
-          <GalleryGridWrapper className="container" active={active}>
-            <div className="gallery-overlay" aria-hidden="true" onClick={e => this.toggleOverlay(e, context)}>
-              <ResponsiveSlider imgArray={galleryArray} currentIndex={currentIndex} />
-              <div alt="Close overlay button" aria-hidden="true" className="close-overlay">
-                <img aria-hidden="true" alt="Close overlay icon" src="/static/images/icons/close.svg" />
+          <React.Fragment>
+            <GalleryGridWrapper className="container" active={active}>
+              <div className="gallery-overlay" aria-hidden="true" onClick={e => this.toggleOverlay(e, context)}>
+                <ResponsiveSlider imgArray={galleryArray} currentIndex={currentIndex} />
+                <div alt="Close overlay button" aria-hidden="true" className="close-overlay">
+                  <img aria-hidden="true" alt="Close overlay icon" src="/static/images/icons/close.svg" />
+                </div>
               </div>
-            </div>
-            {this.renderGallery(context)}
-          </GalleryGridWrapper>
+              {this.renderGallery(context)}
+            </GalleryGridWrapper>
+            <LegalDisclaimer>All images © 2019 Heidi Hölting. All Rights Reserved.</LegalDisclaimer>
+          </React.Fragment>
         )}
       </Context.Consumer>
     );

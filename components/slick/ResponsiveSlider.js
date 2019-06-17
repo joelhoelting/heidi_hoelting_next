@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Slider from 'react-slick';
 import styled from 'styled-components';
 
+import { mediaMin } from '../../styles/mediaQueries';
 import ResponsiveImage from '../images/ResponsiveImage';
 
 const SliderArrowWrapper = styled.div`
@@ -34,16 +35,30 @@ const SliderArrow = props => {
 const SliderWrapper = styled.div`
   height: 100%;
   .gallery-slider {
-    width: 90%;
+    width: 100%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    ${mediaMin.tablet`
+      width: 90%;
+    `}
   }
-  .slick-next::before {
+  .slick-prev {
+    left: 0;
+    ${mediaMin.tablet`
+      left: -12px;
+    `}
+  }
+  .slick-next {
+    right: 0;
+    ${mediaMin.tablet`
+      right: -12px;
+    `}
+  }
+  .slick-prev::before {
     content: none;
   }
-
-  .slick-prev::before {
+  .slick-next::before {
     content: none;
   }
 `;

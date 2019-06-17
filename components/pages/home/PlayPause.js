@@ -1,5 +1,31 @@
 import styled from 'styled-components';
-import { mediaMax } from '../../../styles/mediaQueries';
+import { mediaMin } from '../../../styles/mediaQueries';
+
+const PlayPauseContainer = styled.div`
+  display: none;
+  ${mediaMin.tablet`
+    display: flex;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    transition: all 200ms ease;
+    opacity: ${props => (props.slideShowInitialized ? 1 : 0)};
+    visibility: ${props => (props.slideShowInitialized ? 'visible' : 'hidden')};
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+  `}
+
+  img {
+    display: block;
+  }
+`;
 
 const PlayPause = ({ slideShowActive, slideShowInitialized, toggleSlideShow }) => {
   return (
@@ -14,29 +40,3 @@ const PlayPause = ({ slideShowActive, slideShowInitialized, toggleSlideShow }) =
 };
 
 export default PlayPause;
-
-const PlayPauseContainer = styled.div`
-  border-radius: 50%;
-  cursor: pointer;
-  height: 50px;
-  width: 50px;
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  transition: all 200ms ease;
-  opacity: ${props => (props.slideShowInitialized ? 1 : 0)};
-  visibility: ${props => (props.slideShowInitialized ? 'visible' : 'hidden')};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  &:hover {
-    background: rgba(0, 0, 0, 0.3);
-  }
-  ${mediaMax.tabletLandscape`
-    display: none;
-  `}
-
-  img {
-    display: block;
-  }
-`;

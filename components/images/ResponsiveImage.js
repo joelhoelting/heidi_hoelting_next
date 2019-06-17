@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -15,18 +14,9 @@ const PictureWrapper = styled.picture`
   }
 `;
 
-const ResponsiveImage = ({
-  imageType,
-  alt,
-  ext,
-  src,
-  centered,
-  className,
-  maxHeight,
-  objectFit,
-  objectPosition,
-  width
-}) => {
+const ResponsiveImage = props => {
+  let { imageType, alt, ext, src, centered, className, maxHeight, objectFit, objectPosition, width } = props;
+
   ext = ext || 'jpg';
 
   const srcSetObj = {
@@ -39,6 +29,10 @@ const ResponsiveImage = ({
       string: `${src}_400.${ext} 400w, ${src}_600.${ext} 600w, ${src}_800.${ext} 800w, ${src}_1200.${ext} 1200w, ${src}_1600.${ext} 1600w, ${src}_2000.${ext} 2000w, ${src}_2400.${ext} 2400w, ${src}_2800.${ext} 2800w, ${src}_3200.${ext} 3200w`
     }
   };
+
+  if (src === 'heidi_hoelting_fifth_avenue') {
+    console.log(src);
+  }
 
   return (
     <PictureWrapper

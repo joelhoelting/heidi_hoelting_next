@@ -107,12 +107,29 @@ const ContactWrapper = styled.div`
       }
     }
   }
-  img.instagram-logo {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    width: 40px;
-    cursor: pointer;
+
+  .success-message {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 500ms ease;
+    opacity: ${props => (props.animateSubmitted ? 1 : 0)};
+  }
+
+  #instagram-link {
+    display: none;
+    ${mediaMin.tabletLandscape`
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      display: flex;
+      img {
+        height: 40px;
+        width: 40px;
+      }
+    `}
   }
 `;
 
@@ -129,7 +146,9 @@ class Contact extends Component {
         emailValid: true,
         textareaValid: true
       },
-      mounted: false
+      mounted: false,
+      submitted: false,
+      animateSubmitted: false
     };
   }
 
@@ -150,7 +169,7 @@ class Contact extends Component {
       const { email, name, textarea } = this.state;
 
       const emailBody = {
-        to: 'joelhoelting@protonmail.com',
+        to: 'heidi.hoelting@web.de',
         subject: `HeidiHoelting.com: ${name}`,
         from: 'HeidiHoelting.com',
         message: `Heidi, you have a new email from: ${email}\n\n${textarea}`
@@ -163,7 +182,15 @@ class Contact extends Component {
           'Content-Type': 'application/json'
         }
       })
-        .then(res => console.log('Form Submitted Successfully', res))
+        .then(res => {
+          console.log('form successfully submitted', res);
+
+          this.setState({ submitted: true });
+
+          setTimeout(() => {
+            this.setState({ animateSubmitted: true });
+          }, 300);
+        })
         .catch(error => console.error('Error:', error));
     }
   }
@@ -193,11 +220,11 @@ class Contact extends Component {
     return isFormValid;
   }
 
-  render() {
-    const { name, email, textarea, errors, mounted } = this.state;
+  renderForm() {
+    const { name, email, textarea, submitted } = this.state;
 
-    return (
-      <ContactWrapper errors={errors} mounted={mounted}>
+    if (!submitted) {
+      return (
         <form onSubmit={e => this.handleSubmit(e)}>
           <h1>Contact</h1>
           <label htmlFor="email">
@@ -230,8 +257,27 @@ class Contact extends Component {
           />
           <button type="submit">SEND</button>
         </form>
-        <a href="https://www.instagram.com/heidi_c_nyc/" target="_blank" rel="noopener noreferrer">
-          <img className="instagram-logo" src="/static/images/logos/instagram_black.svg" alt="instagram_logo" />
+      );
+    } else {
+      return (
+        <div className="success-message">
+          <div>
+            <p>Thank you for your message.</p>
+            <p>--Heidi </p>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  render() {
+    const { errors, mounted, animateSubmitted } = this.state;
+
+    return (
+      <ContactWrapper errors={errors} mounted={mounted} animateSubmitted={animateSubmitted}>
+        {this.renderForm()}
+        <a id="instagram-link" href="https://www.instagram.com/heidi_c_nyc/" target="_blank" rel="noopener noreferrer">
+          <img src="/static/images/logos/instagram_black.svg" alt="instagram_logo" />
         </a>
       </ContactWrapper>
     );
