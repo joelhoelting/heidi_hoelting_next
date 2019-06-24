@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components'
 
 import Context from '../config/Context';
 import ResponsiveSlider from '../components/slick/ResponsiveSlider';
@@ -56,9 +56,52 @@ const GalleryGridWrapper = styled.div`
   }
 `;
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+`;
+
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+`;
+
 const GridItem = styled.div`
   position: relative;
   margin-bottom: 16px;
+  
+  &.reveal-0 {
+    visibility: ${props => props.mounted ? 'visible' : 'hidden'};
+    animation: ${props => props.mounted ? fadeIn : fadeOut} 500ms linear;
+    transition: visibility 500ms ease;
+  }
+
+  &.reveal-1 {
+    visibility: ${props => props.mounted ? 'visible' : 'hidden'};
+    animation: ${props => props.mounted ? fadeIn : fadeOut} 500ms linear 200ms;
+    transition: visibility 500ms ease 200ms;
+  }
+  &.reveal-2 {
+    visibility: ${props => props.mounted ? 'visible' : 'hidden'};
+    animation: ${props => props.mounted ? fadeIn : fadeOut} 500ms linear 400ms;
+    transition: visibility 500ms ease 400ms;
+  }
+  &.reveal-3 {
+    visibility: ${props => props.mounted ? 'visible' : 'hidden'};
+    animation: ${props => props.mounted ? fadeIn : fadeOut} 500ms linear 400ms;
+    transition: visibility 500ms ease 400ms;
+  }
+  
   ${mediaMin.phoneXL`
     margin-bottom: initial;
   `}
@@ -137,8 +180,15 @@ class Gallery extends React.Component {
       carousel: {
         active: false,
         currentIndex: undefined
-      }
+      },
+      mounted: false
     };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ mounted: true });
+    }, 500)
   }
 
   toggleOverlay(event = undefined, context, index = undefined) {
@@ -163,11 +213,14 @@ class Gallery extends React.Component {
   }
 
   renderGallery(context) {
+    const { mounted } = this.state;
+
     return galleryArray.map((item, idx) => {
       const { imageType, src, size, objectPosition, order } = item;
 
+      console.log(idx % 3)
       return (
-        <GridItem key={`gallery-item-${order}`} className={size}>
+        <GridItem key={`gallery-item-${order}`} className={`${size} reveal-${idx % 3}`} mounted={mounted}>
           <ResponsiveImage
             imageType={imageType}
             src={`/static/images/pages/gallery/${src}`}
