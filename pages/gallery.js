@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 
 import Context from '../config/Context';
 import ResponsiveSlider from '../components/slick/ResponsiveSlider';
@@ -56,50 +56,22 @@ const GalleryGridWrapper = styled.div`
   }
 `;
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-`;
-
-const fadeOut = keyframes`
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
-`;
-
 const GridItem = styled.div`
   position: relative;
   margin-bottom: 16px;
+  opacity: 0;
   
   &.reveal-0 {
-    visibility: ${props => props.mounted ? 'visible' : 'hidden'};
-    animation: ${props => props.mounted ? fadeIn : fadeOut} 500ms linear;
-    transition: visibility 500ms ease;
+    opacity: 1;
+    transition: 500ms ease 200ms;
   }
-
   &.reveal-1 {
-    visibility: ${props => props.mounted ? 'visible' : 'hidden'};
-    animation: ${props => props.mounted ? fadeIn : fadeOut} 500ms linear 200ms;
-    transition: visibility 500ms ease 200ms;
+    opacity: 1;
+    transition: 500ms ease 400ms;
   }
   &.reveal-2 {
-    visibility: ${props => props.mounted ? 'visible' : 'hidden'};
-    animation: ${props => props.mounted ? fadeIn : fadeOut} 500ms linear 400ms;
-    transition: visibility 500ms ease 400ms;
-  }
-  &.reveal-3 {
-    visibility: ${props => props.mounted ? 'visible' : 'hidden'};
-    animation: ${props => props.mounted ? fadeIn : fadeOut} 500ms linear 400ms;
-    transition: visibility 500ms ease 400ms;
+    opacity: 1;
+    transition: 500ms ease 600ms;
   }
   
   ${mediaMin.phoneXL`
@@ -218,9 +190,10 @@ class Gallery extends React.Component {
     return galleryArray.map((item, idx) => {
       const { imageType, src, size, objectPosition, order } = item;
 
-      console.log(idx % 3)
+      const animationClass = `reveal-${idx % 3}`;
+      
       return (
-        <GridItem key={`gallery-item-${order}`} className={`${size} reveal-${idx % 3}`} mounted={mounted}>
+        <GridItem key={`gallery-item-${order}`} className={`${size} ${mounted ? animationClass : ''}`} mounted={mounted}>
           <ResponsiveImage
             imageType={imageType}
             src={`/static/images/pages/gallery/${src}`}
