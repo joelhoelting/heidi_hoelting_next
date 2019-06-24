@@ -48,11 +48,13 @@ const HeaderWrapper = styled.header`
       transform-origin: right;
       transition: all 0.3s ease-in-out 0s;
     }
-    &:hover:before {
-      visibility: visible;
-      -webkit-transform: scaleX(1);
-      transform: scaleX(1);
-    }
+    ${mediaMin.tablet`
+      &:hover:before {
+        visibility: visible;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+      }
+    `}
 
     ${mediaMin.tabletLandscape`
       font-size: 2rem;

@@ -53,12 +53,18 @@ const AboutWrapper = styled.div`
       `}
     }
   }
-  img.instagram-logo {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 40px;
-    cursor: pointer;
+  #instagram-link {
+    display: none;
+    ${mediaMin.tabletLandscape`
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      img {
+        height: 40px;
+        width: 40px;
+      }
+    `}
   }
 `;
 
@@ -91,8 +97,8 @@ class About extends Component {
             deserunt exercitation. Velit officia enim labore amet nisi esse reprehenderit ad.
           </p>
         </section>
-        <a href="https://www.instagram.com/heidi_c_nyc/" target="_blank" rel="noopener noreferrer">
-          <img className="instagram-logo" src="/static/images/logos/instagram_white.svg" alt="instagram_logo" />
+        <a id="instagram-link" href="https://www.instagram.com/heidi_c_nyc/" target="_blank" rel="noopener noreferrer">
+          <img src="/static/images/logos/instagram_white.svg" alt="instagram_logo" />
         </a>
       </AboutWrapper>
     );

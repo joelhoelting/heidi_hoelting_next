@@ -1,7 +1,7 @@
 {
   "name": "heidi_hoelting_next",
   "version": "1.0.0",
-  "description": "",
+  "description": "Personal website for Heidi Hoelting",
   "main": "index.js",
   "scripts": {
     "dev": "next",
@@ -14,10 +14,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@zeit/next-css": "^0.2.1-canary.4",
     "next": "^8.0.3",
     "prop-types": "^15.7.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-slick": "^0.24.0",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^4.1.3"
   },
   "devDependencies": {
@@ -26,6 +29,7 @@
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",

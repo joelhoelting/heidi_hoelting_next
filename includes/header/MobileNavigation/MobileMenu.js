@@ -42,6 +42,21 @@ const MobileMenuWrapper = styled.div`
       }
     }
   }
+  #instagram-link {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    opacity: ${props => (props.active ? 1 : 0)};
+    ${props => props.active && 'transition: opacity 1000ms ease 500ms'};
+    img {
+      width: 40px;
+      height: 40px;
+    }
+    ${mediaMin.tabletLandscape`
+      display: none;
+    `}
+  }
 `;
 
 const MobileMenu = ({ active }) => (
@@ -55,6 +70,9 @@ const MobileMenu = ({ active }) => (
         </li>
       ))}
     </ul>
+    <a id="instagram-link" href="https://www.instagram.com/heidi_c_nyc/" target="_blank" rel="noopener noreferrer">
+      <img src="/static/images/logos/instagram_black.svg" alt="instagram_logo" />
+    </a>
   </MobileMenuWrapper>
 );
 
