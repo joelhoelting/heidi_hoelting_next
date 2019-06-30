@@ -35,13 +35,17 @@ const SliderArrow = props => {
 const SliderWrapper = styled.div`
   height: 100%;
   .gallery-slider {
-    width: 100%;
+    width: calc(100% + 1px);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     ${mediaMin.tablet`
       width: 90%;
     `}
+    .slick-track {
+      display: flex;
+      align-items: center;
+    }
   }
   .slick-prev {
     left: 0;

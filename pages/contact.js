@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { validEmail } from '../helpers/strings';
 import { mediaMin } from '../styles/mediaQueries';
 
+import ThreeDots from '../components/loaders/ThreeDots';
+
 const ContactWrapper = styled.div`
   height: 100%;
   text-align: center;
@@ -108,7 +110,8 @@ const ContactWrapper = styled.div`
     }
   }
 
-  .success-message {
+  .form-success-message,
+  .form-error-message {
     height: 100%;
     width: 100%;
     display: flex;
@@ -147,8 +150,11 @@ class Contact extends Component {
         textareaValid: true
       },
       mounted: false,
+      showSpinner: false,
       submitted: false,
-      animateSubmitted: false
+      animateSubmitted: false,
+      formSubmitError: false,
+      formSubmitErrorMsg: ''
     };
   }
 
@@ -169,13 +175,13 @@ class Contact extends Component {
       const { email, name, textarea } = this.state;
 
       const emailBody = {
-        to: 'heidi.hoelting@web.de',
+        to: 'joelhoelting@protonmail.com',
         subject: `HeidiHoelting.com: ${name}`,
         from: 'HeidiHoelting.com',
         message: `Heidi, you have a new email from: ${email}\n\n${textarea}`
       };
 
-      fetch('https://api.joelhoelting.com/email/send', {
+      fetch('http://localhost:3001/email/send', {
         method: 'POST',
         body: JSON.stringify(emailBody), // data can be `string` or {object}!
         headers: {
@@ -183,14 +189,33 @@ class Contact extends Component {
         }
       })
         .then(res => {
-          console.log('form successfully submitted', res);
+          const { status, statusText } = res;
 
-          this.setState({ submitted: true });
+          this.setState({
+            showSpinner: true
+          });
 
-          setTimeout(() => {
-            this.setState({ animateSubmitted: true });
-          }, 300);
+          if (status === 200) {
+            console.log('form successfully submitted', res);
+            setTimeout(() => {
+              this.setState({ showSpinner: false, submitted: true });
+            }, 500);
+
+            setTimeout(() => {
+              this.setState({ animateSubmitted: true });
+            }, 800);
+          } else {
+            console.log('form failed to send', res);
+            setTimeout(() => {
+              this.setState({ showSpinner: false, formSubmitError: true, formSubmitErrorMsg: statusText });
+            }, 500);
+
+            setTimeout(() => {
+              this.setState({ animateSubmitted: true });
+            }, 800);
+          }
         })
+        // eslint-disable-next-line
         .catch(error => console.error('Error:', error));
     }
   }
@@ -221,9 +246,11 @@ class Contact extends Component {
   }
 
   renderForm() {
-    const { name, email, textarea, submitted } = this.state;
+    const { name, email, textarea, showSpinner, submitted, formSubmitError, formSubmitErrorMsg } = this.state;
 
-    if (!submitted) {
+    if (showSpinner) {
+      return <ThreeDots />;
+    } else if (!submitted && !formSubmitError) {
       return (
         <form onSubmit={e => this.handleSubmit(e)}>
           <h1>Contact</h1>
@@ -258,9 +285,18 @@ class Contact extends Component {
           <button type="submit">SEND</button>
         </form>
       );
-    } else {
+    } else if (!submitted && formSubmitError) {
       return (
-        <div className="success-message">
+        <div className="form-success-message">
+          <div>
+            <p>We experienced an error:</p>
+            <p>Message: {formSubmitErrorMsg}</p>
+          </div>
+        </div>
+      );
+    } else if (!submitted && !formSubmitError) {
+      return (
+        <div className="form-error-message">
           <div>
             <p>Thank you for your message.</p>
             <p>--Heidi </p>
