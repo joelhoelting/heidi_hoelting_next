@@ -4,28 +4,6 @@
 
 const galleryArray = [
   {
-    src: 'heidi_hoelting_beach_with_balloon',
-    size: 'tall',
-    imageType: 'large',
-    objectPosition: '43% 50%'
-  },
-  {
-    src: 'heidi_hoelting_diving_board_drink_glasses',
-    size: 'square-small',
-    imageType: 'large'
-  },
-  {
-    src: 'heidi_hoelting_full_body_statue',
-    size: 'wide',
-    imageType: 'large'
-  },
-  {
-    src: 'heidi_hoelting_green_rocks_beach',
-    size: 'square',
-    imageType: 'large',
-    objectPosition: 'center center'
-  },
-  {
     src: 'heidi_hoelting_happy_jump_beach',
     size: 'wide',
     imageType: 'large'
