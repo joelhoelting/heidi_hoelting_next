@@ -17,6 +17,7 @@ const StyledNav = styled.nav`
     list-style-type: none;
     padding-right: 40px;
     li {
+      font-family: 'Alegreya', serif;
       font-size: 1.4rem;
       cursor: pointer;
       letter-spacing: 2px;
@@ -35,7 +36,7 @@ const StyledNav = styled.nav`
         position: absolute;
         width: 100%;
         height: 1px;
-        bottom: -10px;
+        bottom: -5px;
         left: 0;
         background-color: ${props => props.textColor};
         visibility: hidden;

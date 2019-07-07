@@ -11,6 +11,9 @@ const PictureWrapper = styled.picture`
     ${props => props.maxHeight && `max-height: ${props.maxHeight}`};
     width: ${props => (props.width ? props.width : 'auto')};
     ${props => props.centered && 'margin: 0 auto'};
+    &.carousel-image {
+      max-height: 700px;
+    }
   }
 `;
 

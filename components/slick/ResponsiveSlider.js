@@ -84,7 +84,6 @@ class ResponsiveSlider extends Component {
         <ResponsiveImage
           className="carousel-image"
           centered
-          maxHeight="800px"
           key={`carousel-image-${img.order}`}
           imageType={imageType}
           src={`/static/images/pages/gallery/${src}`}

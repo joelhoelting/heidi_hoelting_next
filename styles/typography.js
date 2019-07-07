@@ -15,7 +15,7 @@ const TypographyStyle = createGlobalStyle`
   }
 
   p, li, input, label, span, textarea, button {
-    font-family: 'Philosopher', serif;
+    font-family: 'Lato', sans-serif;
     letter-spacing: 1px;
   }
 

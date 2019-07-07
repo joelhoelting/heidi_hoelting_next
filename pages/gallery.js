@@ -115,7 +115,7 @@ const GridItem = styled.div`
     background: none;
     cursor: pointer;
     transition: background 100ms ease;
-    ${mediaMin.phoneXL`
+    ${mediaMin.tabletLandscape`
       &:hover {
         background: rgba(0, 0, 0, 0.2);
       }
@@ -190,16 +190,13 @@ class Gallery extends React.Component {
     const { mounted } = this.state;
 
     return galleryArray.map((item, idx) => {
-      const { imageType, src, size, objectPosition, order } = item;
+      const { imageType, src, size, objectPosition } = item;
 
       const animationClass = `reveal-${idx % 3}`;
 
       return (
-        <GridItem
-          key={`gallery-item-${order}`}
-          className={`${size} ${mounted ? animationClass : ''}`}
-          mounted={mounted}
-        >
+        // eslint-disable-next-line
+        <GridItem key={`gallery-item-${idx}`} className={`${size} ${mounted ? animationClass : ''}`} mounted={mounted}>
           <ResponsiveImage
             imageType={imageType}
             src={`/static/images/pages/gallery/${src}`}

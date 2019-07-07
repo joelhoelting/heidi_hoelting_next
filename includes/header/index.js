@@ -11,7 +11,7 @@ import { mediaMin } from '../../styles/mediaQueries';
 import routerColors from '../../data/routeColors';
 
 const HeaderWrapper = styled.header`
-  ${props => (props.route === 'gallery' ? 'background: white' : null)};
+  ${props => (props.route === 'gallery' ? 'background: rgba(255,255,255,.8)' : null)};
   position: fixed;
   left: 0;
   top: 0;
@@ -23,7 +23,7 @@ const HeaderWrapper = styled.header`
   align-items: center;
   font-family: 'Alegreya', serif;
   ${mediaMin.tabletLandscape`
-    height: 100px;
+    height: 80px;
   `}
   .main-logo {
     margin: 0 20px;
