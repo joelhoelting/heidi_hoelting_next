@@ -1,13 +1,13 @@
 // Sizes: tall, wide, square, square-small
 // Image Types: small, large
-// Object Position: 'top center', 'top left', 'top right'
+// Object Position: (x, y) 'top center', 'top left', 'top right'
 
 const galleryArray = [
   {
     src: 'heidi_hoelting_beach_with_balloon',
     size: 'tall',
     imageType: 'large',
-    objectPosition: '40% 50%'
+    objectPosition: '43% 50%'
   },
   {
     src: 'heidi_hoelting_diving_board_drink_glasses',
@@ -21,8 +21,9 @@ const galleryArray = [
   },
   {
     src: 'heidi_hoelting_green_rocks_beach',
-    size: 'wide',
-    imageType: 'large'
+    size: 'square',
+    imageType: 'large',
+    objectPosition: 'center center'
   },
   {
     src: 'heidi_hoelting_happy_jump_beach',

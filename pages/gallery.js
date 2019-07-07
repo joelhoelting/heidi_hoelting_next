@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 import Context from '../config/Context';
 import ResponsiveSlider from '../components/slick/ResponsiveSlider';
@@ -60,7 +60,7 @@ const GridItem = styled.div`
   position: relative;
   margin-bottom: 16px;
   opacity: 0;
-  
+
   &.reveal-0 {
     opacity: 1;
     transition: 500ms ease 200ms;
@@ -73,7 +73,7 @@ const GridItem = styled.div`
     opacity: 1;
     transition: 500ms ease 600ms;
   }
-  
+
   ${mediaMin.phoneXL`
     margin-bottom: initial;
   `}
@@ -115,9 +115,11 @@ const GridItem = styled.div`
     background: none;
     cursor: pointer;
     transition: background 100ms ease;
-    &:hover {
-      background: rgba(0, 0, 0, 0.2);
-    }
+    ${mediaMin.phoneXL`
+      &:hover {
+        background: rgba(0, 0, 0, 0.2);
+      }
+    `}
   }
   picture {
     max-width: 100%;
@@ -160,7 +162,7 @@ class Gallery extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       this.setState({ mounted: true });
-    }, 500)
+    }, 500);
   }
 
   toggleOverlay(event = undefined, context, index = undefined) {
@@ -191,9 +193,13 @@ class Gallery extends React.Component {
       const { imageType, src, size, objectPosition, order } = item;
 
       const animationClass = `reveal-${idx % 3}`;
-      
+
       return (
-        <GridItem key={`gallery-item-${order}`} className={`${size} ${mounted ? animationClass : ''}`} mounted={mounted}>
+        <GridItem
+          key={`gallery-item-${order}`}
+          className={`${size} ${mounted ? animationClass : ''}`}
+          mounted={mounted}
+        >
           <ResponsiveImage
             imageType={imageType}
             src={`/static/images/pages/gallery/${src}`}
