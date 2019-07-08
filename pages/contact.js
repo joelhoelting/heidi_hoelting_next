@@ -15,10 +15,11 @@ const ContactWrapper = styled.div`
   background-repeat: no-repeat;
   background-position: top right;
   display: flex;
-  align-items: flex-end;
+  padding-top: 50px;
   opacity: ${props => (!props.mounted ? 0 : 1)};
   transition: opacity 500ms ease;
   ${mediaMin.tabletLandscape`
+    padding-top: 0;
     align-items: center;
     justify-content: center;
     flex-direction: column;
