@@ -294,7 +294,7 @@ class Contact extends Component {
           </div>
         </div>
       );
-    } else if (!submitted && !formSubmitError) {
+    } else if (submitted && !formSubmitError) {
       return (
         <div className="form-error-message">
           <div>
