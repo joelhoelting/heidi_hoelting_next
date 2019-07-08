@@ -176,7 +176,7 @@ class Contact extends Component {
       const { email, name, textarea } = this.state;
 
       const emailBody = {
-        to: 'joelhoelting@protonmail.com',
+        to: 'heidi.hoelting@web.de',
         subject: `HeidiHoelting.com: ${name}`,
         from: 'HeidiHoelting.com',
         message: `Heidi, you have a new email from: ${email}\n\n${textarea}`
