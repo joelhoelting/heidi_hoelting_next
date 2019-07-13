@@ -173,13 +173,14 @@ class Gallery extends React.Component {
       return;
     }
 
-    context.toggleScrollBar();
-
     const { carousel } = this.state;
     const { active } = carousel;
+    const newActiveState = !active;
+
+    newActiveState ? context.lockScrollBar(true) : context.lockScrollBar(false);
 
     const newState = {
-      active: !active,
+      active: newActiveState,
       currentIndex: index
     };
 
