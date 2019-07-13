@@ -12,18 +12,18 @@ class ContextProvider extends React.Component {
   lockScrollBar(isLocked) {
     if (isLocked) {
       setTimeout(() => {
-        document.querySelector('body').style.overflowY = 'hidden';
+        document.querySelector('body').style.overflow = 'hidden';
         document.ontouchmove = function(e) {
           e.preventDefault();
         };
-      }, 5000);
+      }, 200);
     } else {
       setTimeout(() => {
-        document.querySelector('body').style.overflowY = 'visible';
+        document.querySelector('body').style.overflow = 'visible';
         document.ontouchmove = function() {
           return true;
         };
-      }, 5000);
+      }, 200);
     }
   }
 
