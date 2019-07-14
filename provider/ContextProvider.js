@@ -16,14 +16,14 @@ class ContextProvider extends React.Component {
         document.ontouchmove = function(e) {
           e.preventDefault();
         };
-      }, 5000);
+      }, 200);
     } else {
       setTimeout(() => {
         document.querySelector('body').style.overflow = 'visible';
         document.ontouchmove = function() {
           return true;
         };
-      }, 5000);
+      }, 200);
     }
   }
 

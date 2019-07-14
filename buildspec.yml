@@ -15,4 +15,4 @@ phases:
       - aws s3 sync out/ "s3://${BUCKET_NAME}" --delete
   post_build:
     commands:
-      - echo "This is finished"
+      - echo "Build complete"
