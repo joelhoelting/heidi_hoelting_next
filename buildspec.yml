@@ -15,5 +15,5 @@ phases:
       - aws s3 sync out/ "s3://${BUCKET_NAME}" --delete
   post_build:
     commands:
-      - echo "Build complete"
+      - echo "Build complete on branch ${BRANCH_NAME} on $(date)"
       # - aws sns publish --phone-number ${PHONE_NUMBER} --message "Build succeeded on ${BRANCH_NAME} branch. $(date)"
