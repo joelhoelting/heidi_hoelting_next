@@ -12,7 +12,4 @@ phases:
       - echo Build started on `date`
       - npm run build
       - npm run export
-artifacts:
-  files:
-    - '**/*'
-  base-directory: out
+      - aws s3 sync out/* "s3://${BUCKET_NAME}"
