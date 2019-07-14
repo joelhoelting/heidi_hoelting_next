@@ -14,7 +14,7 @@ phases:
       - npm run export
   post_build:
     commands:
-      - aws s3 sync out "s3://${BUCKET_NAME}"
+      - aws s3 sync . "s3://${BUCKET_NAME}"
 artifacts:
   files:
     - '**/*'
