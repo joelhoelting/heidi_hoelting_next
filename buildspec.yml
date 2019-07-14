@@ -21,8 +21,7 @@ phases:
       - |
         if [ $CODEBUILD_BUILD_SUCCEEDING -eq 1 ]; then
           echo "Build/Deploy success on branch ${BRANCH_NAME} on $(date)"
-          aws sns publish --phone-number ${PHONE_NUMBER} --message "Build/Deploy success on branch ${BRANCH_NAME} on $(date)"
+          aws sns publish --phone-number ${PHONE_NUMBER} --message "Build/deploy success. ${BUCKET_NAME}; ${BRANCH_NAME} branch; on $(date)"
         else
           echo "Build/Deploy failure"
         fi
-      # - aws sns publish --phone-number ${PHONE_NUMBER} --message "Build/Deploy success on branch ${BRANCH_NAME} on $(date)"
