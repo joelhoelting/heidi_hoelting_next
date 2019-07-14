@@ -12,8 +12,11 @@ phases:
       - echo Build started on `date`
       - npm run build
       - npm run export
+      - echo "Deploy Beginning"
       - aws s3 sync out/ "s3://${BUCKET_NAME}" --delete
+      - echo "Deploy Complete"
   post_build:
     commands:
+      - echo $CODEBUILD_BUILD_SUCCEEDING
       - echo "Build/Deploy success on branch ${BRANCH_NAME} on $(date)"
       # - aws sns publish --phone-number ${PHONE_NUMBER} --message "Build/Deploy success on branch ${BRANCH_NAME} on $(date)"
