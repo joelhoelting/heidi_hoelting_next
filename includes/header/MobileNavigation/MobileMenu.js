@@ -25,6 +25,7 @@ const MobileMenuWrapper = styled.div`
   ul {
     padding-left: 0;
     li {
+      font-family: 'Alegreya', serif;
       list-style-type: none;
       text-align: center;
       font-size: 2.4em;
@@ -39,6 +40,9 @@ const MobileMenuWrapper = styled.div`
       }
       &:nth-child(3) {
         ${props => props.active && 'transition: opacity 1000ms ease 400ms'};
+      }
+      a {
+        text-decoration: none;
       }
     }
   }

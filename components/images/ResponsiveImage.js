@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { mediaMin } from '../../styles/mediaQueries';
 
 const PictureWrapper = styled.picture`
   width: 100%;
@@ -11,6 +12,12 @@ const PictureWrapper = styled.picture`
     ${props => props.maxHeight && `max-height: ${props.maxHeight}`};
     width: ${props => (props.width ? props.width : 'auto')};
     ${props => props.centered && 'margin: 0 auto'};
+    &.carousel-image {
+      max-height: 700px;
+      ${mediaMin.desktopLarge`
+        max-height: 900px;
+      `}
+    }
   }
 `;
 
@@ -21,11 +28,11 @@ const ResponsiveImage = props => {
 
   const srcSetObj = {
     small: {
-      default: `${src}_1600.${ext} 1600w`,
+      default: `${src}_1600.${ext}`,
       string: `${src}_400.${ext} 400w, ${src}_600.${ext} 600w, ${src}_800.${ext} 800w, ${src}_1200.${ext} 1200w, ${src}_1600.${ext} 1600w`
     },
     large: {
-      default: `${src}_3200.${ext} 3200w`,
+      default: `${src}_3200.${ext}`,
       string: `${src}_400.${ext} 400w, ${src}_600.${ext} 600w, ${src}_800.${ext} 800w, ${src}_1200.${ext} 1200w, ${src}_1600.${ext} 1600w, ${src}_2000.${ext} 2000w, ${src}_2400.${ext} 2400w, ${src}_2800.${ext} 2800w, ${src}_3200.${ext} 3200w`
     }
   };

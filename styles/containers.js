@@ -6,7 +6,7 @@ const ContainerStyles = createGlobalStyle`
     width: calc(100% - 40px);
     margin: 50px auto 0;
     ${mediaMin.tabletLandscape`
-      margin: 100px auto 0;
+      margin: 80px auto 0;
       width: calc(100% - 80px);
     `}
   }

@@ -15,13 +15,18 @@ const StyledNav = styled.nav`
     display: flex;
     justify-content: center;
     list-style-type: none;
+    padding-right: 40px;
     li {
-      margin: 0 1.4em;
+      font-family: 'Alegreya', serif;
       font-size: 1.4rem;
       cursor: pointer;
       letter-spacing: 2px;
       color: ${props => props.textColor};
       transition: color 400ms ease;
+      &:nth-child(1),
+      &:nth-child(2) {
+        margin-right: 1.4em;
+      }
       a {
         position: relative;
         text-decoration: none;
@@ -31,7 +36,7 @@ const StyledNav = styled.nav`
         position: absolute;
         width: 100%;
         height: 1px;
-        bottom: -10px;
+        bottom: -5px;
         left: 0;
         background-color: ${props => props.textColor};
         visibility: hidden;

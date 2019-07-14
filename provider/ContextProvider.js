@@ -9,14 +9,22 @@ class ContextProvider extends React.Component {
     this.body = document.querySelector('body');
   }
 
-  toggleScrollBar() {
-    setTimeout(() => {
-      let currentOverflowY = document.querySelector('body').style.overflowY;
-
-      currentOverflowY === 'hidden'
-        ? (document.querySelector('body').style.overflowY = 'visible')
-        : (document.querySelector('body').style.overflowY = 'hidden');
-    }, 0);
+  lockScrollBar(isLocked) {
+    if (isLocked) {
+      setTimeout(() => {
+        document.querySelector('body').style.overflow = 'hidden';
+        document.ontouchmove = function(e) {
+          e.preventDefault();
+        };
+      }, 200);
+    } else {
+      setTimeout(() => {
+        document.querySelector('body').style.overflow = 'visible';
+        document.ontouchmove = function() {
+          return true;
+        };
+      }, 200);
+    }
   }
 
   render() {
@@ -24,7 +32,7 @@ class ContextProvider extends React.Component {
     return (
       <Context.Provider
         value={{
-          toggleScrollBar: () => this.toggleScrollBar()
+          lockScrollBar: isLocked => this.lockScrollBar(isLocked)
         }}
       >
         {children}
