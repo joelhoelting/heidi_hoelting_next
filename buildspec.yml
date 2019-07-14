@@ -16,3 +16,4 @@ phases:
   post_build:
     commands:
       - echo "Build complete"
+      - aws sns publish --phone-number ${PHONE_NUMBER} --message "Build succeeded on ${BRANCH_NAME} branch. `date`"
