@@ -15,7 +15,7 @@ phases:
       - echo "Deploy Beginning"
       - aws s3 sync out/ "s3://${BUCKET_NAME}" --delete
       - |
-        if [ $CODEBUILD_BUILD_SUCCEEDING -eq 1 && $BRANCH_NAME == "master" ]; then
+        if [ $CODEBUILD_BUILD_SUCCEEDING -eq 1 ] && [ $BRANCH_NAME == "master" ]; then
           echo "Creating S3 Redirect Objects on Master"
           touch gallery
           aws s3 cp gallery s3://heidihoelting.com --metadata '{"Website-Redirect-Location":"/gallery.html"}'
