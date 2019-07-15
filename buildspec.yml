@@ -17,7 +17,7 @@ phases:
         if [ $CODEBUILD_BUILD_SUCCEEDING -eq 1 ]; then
           if [ "$BRANCH_NAME" = "master" ]; then
             echo "Syncing files with AWS w/ Cache Control Headers"
-            aws s3 sync out/ "s3://${BUCKET_NAME}" --delete --cache-control max-age=31536000
+            aws s3 sync out/ "s3://${BUCKET_NAME}" --delete --cache-control max-age=2628000
           else
             echo "Syncing files with AWS"
             aws s3 sync out/ "s3://${BUCKET_NAME}" --delete
@@ -29,11 +29,11 @@ phases:
         if [ $CODEBUILD_BUILD_SUCCEEDING -eq 1 ] && [ "$BRANCH_NAME" = "master" ]; then
           echo "Creating S3 Redirect Objects on Master"
           touch gallery
-          aws s3 cp gallery s3://heidihoelting.com --metadata '{"x-amz-website-redirect-location":"/gallery.html"}'
+          aws s3api put-object --bucket heidihoelting.com --key gallery --website-redirect-location /gallery.html
           touch about
-          aws s3 cp about s3://heidihoelting.com --metadata '{"x-amz-website-redirect-location":"/about.html"}'
+          aws s3api put-object --bucket heidihoelting.com --key about --website-redirect-location /about.html
           touch contact
-          aws s3 cp contact s3://heidihoelting.com --metadata '{"x-amz-website-redirect-location":"/contact.html"}'          
+          aws s3api put-object --bucket heidihoelting.com --key contact --website-redirect-location /contact.html          
         fi
       - echo "Deploy Complete"
   post_build:
