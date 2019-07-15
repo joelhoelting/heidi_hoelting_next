@@ -13,7 +13,6 @@ phases:
       - npm run build
       - npm run export
       - echo "Deploy Beginning"
-      - aws s3 sync out/ "s3://${BUCKET_NAME}" --delete
       - |
         if [ $CODEBUILD_BUILD_SUCCEEDING -eq 1 ]; then
           if [ "$BRANCH_NAME" = "master" ]; then
@@ -30,11 +29,11 @@ phases:
         if [ $CODEBUILD_BUILD_SUCCEEDING -eq 1 ] && [ "$BRANCH_NAME" = "master" ]; then
           echo "Creating S3 Redirect Objects on Master"
           touch gallery
-          aws s3 cp gallery s3://heidihoelting.com --metadata '{"Website-Redirect-Location":"/gallery.html"}'
+          aws s3 cp gallery s3://heidihoelting.com --metadata '{"x-amz-website-redirect-location":"/gallery.html"}'
           touch about
-          aws s3 cp about s3://heidihoelting.com --metadata '{"Website-Redirect-Location":"/about.html"}'
+          aws s3 cp about s3://heidihoelting.com --metadata '{"x-amz-website-redirect-location":"/about.html"}'
           touch contact
-          aws s3 cp contact s3://heidihoelting.com --metadata '{"Website-Redirect-Location":"/contact.html"}'          
+          aws s3 cp contact s3://heidihoelting.com --metadata '{"x-amz-website-redirect-location":"/contact.html"}'          
         fi
       - echo "Deploy Complete"
   post_build:
