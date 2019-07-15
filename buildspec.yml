@@ -17,7 +17,7 @@ phases:
         if [ $CODEBUILD_BUILD_SUCCEEDING -eq 1 ]; then
           if [ "$BRANCH_NAME" = "master" ]; then
             echo "Syncing files with AWS w/ Cache Control Headers"
-            aws s3 sync out/ "s3://${BUCKET_NAME}" --delete --cache-control max-age=2628000
+            aws s3 sync out/ "s3://${BUCKET_NAME}" --delete --cache-control max-age=31557600
           else
             echo "Syncing files with AWS"
             aws s3 sync out/ "s3://${BUCKET_NAME}" --delete
