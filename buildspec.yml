@@ -15,6 +15,18 @@ phases:
       - echo "Deploy Beginning"
       - aws s3 sync out/ "s3://${BUCKET_NAME}" --delete
       - |
+        if [ $CODEBUILD_BUILD_SUCCEEDING -eq 1 ]; then
+          if [ "$BRANCH_NAME" = "master" ]; then
+            echo "Syncing files with AWS w/ Cache Control Headers"
+            aws s3 sync out/ "s3://${BUCKET_NAME}" --delete --cache-control max-age=31536000
+          else
+            echo "Syncing files with AWS"
+            aws s3 sync out/ "s3://${BUCKET_NAME}" --delete
+          fi
+        else
+          echo "Build/Deploy failure"
+        fi
+      - |
         if [ $CODEBUILD_BUILD_SUCCEEDING -eq 1 ] && [ "$BRANCH_NAME" = "master" ]; then
           echo "Creating S3 Redirect Objects on Master"
           touch gallery
