@@ -14,12 +14,32 @@ phases:
       - npm run export
       - echo "Deploy Beginning"
       - aws s3 sync out/ "s3://${BUCKET_NAME}" --delete
+      - |
+        if [ $CODEBUILD_BUILD_SUCCEEDING -eq 1 && $BRANCH_NAME -eq "master" ]; then
+          echo "Creating S3 Redirect Objects on Master"
+          touch gallery
+          aws s3 cp gallery s3://heidihoelting.com --metadata '{"Website-Redirect-Location":"/gallery.html"}'
+          touch about
+          aws s3 cp about s3://heidihoelting.com --metadata '{"Website-Redirect-Location":"/about.html"}'
+          touch contact
+          aws s3 cp contact s3://heidihoelting.com --metadata '{"Website-Redirect-Location":"/contact.html"}'          
+        fi
       - echo "Deploy Complete"
   post_build:
     commands:
       - echo $CODEBUILD_BUILD_SUCCEEDING
       - |
         if [ $CODEBUILD_BUILD_SUCCEEDING -eq 1 ]; then
+          if [ $BRANCH_NAME -eq "master"]; then
+            touch gallery
+            aws s3 cp gallery s3://heidihoelting.com --metadata '{"Website-Redirect-Location":"/gallery.html"}'
+            touch about
+            aws s3 cp about s3://heidihoelting.com --metadata '{"Website-Redirect-Location":"/about.html"}'
+            touch contact
+            aws s3 cp contact s3://heidihoelting.com --metadata '{"Website-Redirect-Location":"/contact.html"}'
+            
+            aws cloudfront create-invalidation --distribution-id E3VXSWF40FW1P1 --paths /*
+          fi
           echo "Build/Deploy success on branch ${BRANCH_NAME} on $(date)"
           aws sns publish --phone-number ${PHONE_NUMBER} --message "Build/deploy success. ${BUCKET_NAME}; ${BRANCH_NAME} branch; on $(date)"
         else
