@@ -31,7 +31,8 @@ phases:
       - |
         if [ $CODEBUILD_BUILD_SUCCEEDING -eq 1 ]; then
           if [ "$BRANCH_NAME" = "master" ]; then
-            aws cloudfront create-invalidation --distribution-id E3VXSWF40FW1P1 --paths /*
+            echo Cloudfront ID - $CF_DIST_ID
+            aws cloudfront create-invalidation --distribution-id $CF_DIST_ID --paths /*
           fi
           echo "Build/Deploy success on branch ${BRANCH_NAME} on $(date)"
           aws sns publish --phone-number ${PHONE_NUMBER} --message "Build/deploy success. ${BUCKET_NAME}; ${BRANCH_NAME} branch; on $(date)"
