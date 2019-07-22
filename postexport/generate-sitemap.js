@@ -1,9 +1,7 @@
 const fs = require('fs');
 
 // Format to the right date
-const formatDate = date => `${date.toISOString().split('.')[0]}+0:00`;
-// Priority is determined by path depth. Feel free to modify this if needed:
-const getPriority = url => ((100 - (url.split('/').length - 2) * 10) / 100).toFixed(2);
+const formatDate = date => `${date.toISOString()}`;
 
 // Just pick current date as last modified
 const lastModified = formatDate(new Date());
@@ -20,12 +18,11 @@ const xmlUrlWrapper = nodes => `${xmlHeader}
 // Determine and return the nodes for every page
 const xmlUrlNode = (domain, page, lastmod) => {
   const loc = page === 'index.html' ? `${domain}` : `${domain}/${page}`;
-  const priority = getPriority(page);
 
   return `<url>
   <loc>${loc}</loc>
   <lastmod>${lastmod}</lastmod>
-  <priority>${priority}</priority>
+  <priority>1.00</priority>
 </url>`;
 };
 
