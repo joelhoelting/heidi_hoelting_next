@@ -1,10 +1,12 @@
 const fs = require('fs');
 
-// Format to the right date
-const formatDate = date => `${date.toISOString()}`;
+// Set lastmod
+const dateObj = new Date();
+const month = dateObj.getUTCMonth() + 1; //months from 1-12
+const day = dateObj.getUTCDate();
+const year = dateObj.getUTCFullYear();
 
-// Just pick current date as last modified
-const lastModified = formatDate(new Date());
+const lastModified = `${year}-${month}-${day}`;
 
 // Set the header
 const xmlHeader = `<?xml version="1.0" encoding="UTF-8"?>
