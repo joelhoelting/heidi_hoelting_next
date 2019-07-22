@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://heidihoelting.com/sitemap.xml

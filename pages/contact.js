@@ -137,6 +137,13 @@ const ContactWrapper = styled.div`
   }
 `;
 
+const ContactLoadScreen = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
 class Contact extends Component {
   constructor(props) {
     super(props);
@@ -151,7 +158,7 @@ class Contact extends Component {
         textareaValid: true
       },
       mounted: false,
-      showSpinner: false,
+      showLoadScreen: false,
       submitted: false,
       animateSubmitted: false,
       formSubmitError: false,
@@ -193,13 +200,13 @@ class Contact extends Component {
           const { status, statusText } = res;
 
           this.setState({
-            showSpinner: true
+            showLoadScreen: true
           });
 
           if (status === 200) {
             console.log('form successfully submitted', res);
             setTimeout(() => {
-              this.setState({ showSpinner: false, submitted: true });
+              this.setState({ showLoadScreen: false, submitted: true });
             }, 500);
 
             setTimeout(() => {
@@ -208,7 +215,7 @@ class Contact extends Component {
           } else {
             console.log('form failed to send', res);
             setTimeout(() => {
-              this.setState({ showSpinner: false, formSubmitError: true, formSubmitErrorMsg: statusText });
+              this.setState({ showLoadScreen: false, formSubmitError: true, formSubmitErrorMsg: statusText });
             }, 500);
 
             setTimeout(() => {
@@ -247,10 +254,14 @@ class Contact extends Component {
   }
 
   renderForm() {
-    const { name, email, textarea, showSpinner, submitted, formSubmitError, formSubmitErrorMsg } = this.state;
+    const { name, email, textarea, showLoadScreen, submitted, formSubmitError, formSubmitErrorMsg } = this.state;
 
-    if (showSpinner) {
-      return <ThreeDots />;
+    if (showLoadScreen) {
+      return (
+        <ContactLoadScreen>
+          <ThreeDots />
+        </ContactLoadScreen>
+      );
     } else if (!submitted && !formSubmitError) {
       return (
         <form onSubmit={e => this.handleSubmit(e)}>
