@@ -2,20 +2,41 @@ import Document, { Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
-  static getInitialProps({ renderPage }) {
+  static async getInitialProps({ renderPage }) {
+    const isProduction = process.env.NODE_ENV === 'production';
     const sheet = new ServerStyleSheet();
 
     const page = renderPage(App => props => sheet.collectStyles(<App {...props} />));
 
     const styleTags = sheet.getStyleElement();
 
-    return { ...page, styleTags };
+    return { ...page, styleTags, isProduction };
+  }
+
+  setGoogleTags() {
+    return {
+      __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-145832515-1');
+      `
+    };
   }
 
   render() {
+    const { isProduction } = this.props;
+
     return (
       <html lang="en-US">
         <Head>
+          {isProduction && (
+            <React.Fragment>
+              <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXX-X" />
+              {/* We call the function above to inject the contents of the script tag */}
+              <script dangerouslySetInnerHTML={this.setGoogleTags()} />
+            </React.Fragment>
+          )}
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="UTF-8" />
           <link href="https://fonts.googleapis.com/css?family=Alegreya|Lato&display=swap" rel="stylesheet" />
