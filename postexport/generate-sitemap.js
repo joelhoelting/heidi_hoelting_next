@@ -39,7 +39,7 @@ exports.generateSitemap = (domain, targetFolder) => {
   const writeLocation = `${targetFolder.endsWith('/') ? targetFolder : `${targetFolder}/`}${fileName}`;
 
   var pages = [];
-  fs.readdir('../out/', (err, files) => {
+  fs.readdir('./out/', (err, files) => {
     if (err) throw err;
     files.forEach(function(file) {
       const fileExt = file.split('.').pop();
