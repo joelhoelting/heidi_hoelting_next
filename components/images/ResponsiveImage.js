@@ -37,10 +37,6 @@ const ResponsiveImage = props => {
     }
   };
 
-  if (src === 'heidi_hoelting_fifth_avenue') {
-    console.log(src);
-  }
-
   return (
     <PictureWrapper
       centered={centered}

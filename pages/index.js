@@ -1,7 +1,6 @@
 import CoverImage from '../components/pages/home/CoverImage';
 import Bullets from '../components/pages/home/Bullets';
 import PlayPause from '../components/pages/home/PlayPause';
-import IntroDiv from '../components/pages/home/IntroDiv';
 
 import homeCarouselData from '../data/homeCarouselData';
 
@@ -63,7 +62,7 @@ class Index extends React.Component {
         newState = { slideShowActive: true };
       }
       this.setState(newState);
-      this.imageInterval = setInterval(() => this.changeImage(), 5000);
+      this.imageInterval = setInterval(() => this.changeImage(), 2500);
     }
   }
 
@@ -116,11 +115,9 @@ class Index extends React.Component {
   }
 
   render() {
-    const { activeImage } = this.state;
     return (
       <React.Fragment>
         {this.generateCarousel()}
-        <IntroDiv active={activeImage === 0} />
         {this.renderBullets()}
         {this.renderPlayPause()}
       </React.Fragment>
