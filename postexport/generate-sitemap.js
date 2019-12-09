@@ -52,6 +52,7 @@ exports.generateSitemap = (domain, targetFolder) => {
 
     fs.writeFile(`${writeLocation}`, sitemap, err => {
       if (err) throw err;
+      // eslint-disable-next-line
       console.log(`sitemap.xml with ${pages.length} entries was written to ${targetFolder}${fileName}`);
     });
   });
