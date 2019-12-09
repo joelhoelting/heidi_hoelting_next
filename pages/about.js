@@ -92,8 +92,8 @@ class About extends Component {
           <h1>Heidi Hölting</h1>
           <p>
             Heidi Hölting is a highly experienced professional fashion and fit model based in New York City. She works
-            for international clients including Tommy Hilfiger, Roberto Cavalli, Gap Inc., Calvin Klein, Vineyard Vines,
-            Jessica Simpson Swimwear, Club Monaco, Sofía Vergara, Juicy Couture and many more.
+            for international clients including Tommy Hilfiger, Roberto Cavalli, Gap Inc., Calvin Klein, Monique
+            Lhuillier, Jessica Simpson Swimwear, Club Monaco, Sofía Vergara, Juicy Couture and many more.
           </p>
         </section>
         <a id="instagram-link" href="https://www.instagram.com/heidi_c_nyc/" target="_blank" rel="noopener noreferrer">

@@ -10,6 +10,11 @@ const galleryArray = [
     objectPosition: '42% 50%'
   },
   {
+    src: 'heidi_hoelting_central_park_sun_drenched',
+    size: 'tall',
+    imageType: 'small'
+  },
+  {
     src: 'heidi_hoelting_diving_board_drink_glasses',
     size: 'square-small',
     imageType: 'large'
@@ -20,10 +25,9 @@ const galleryArray = [
     imageType: 'large'
   },
   {
-    src: 'heidi_hoelting_green_rocks_beach',
-    size: 'square',
-    imageType: 'large',
-    objectPosition: 'center center'
+    src: 'heidi_hoelting_standing_chic_purse',
+    size: 'tall',
+    imageType: 'small'
   },
   {
     src: 'heidi_hoelting_happy_jump_beach',
@@ -116,27 +120,12 @@ const galleryArray = [
     imageType: 'small',
     objectPosition: '40% 50%'
   },
-  {
-    src: 'heidi_hoelting_central_park_sun_drenched',
-    size: 'tall',
-    imageType: 'small'
-  },
+
   {
     src: 'heidi_hoelting_lipstick_serious',
     size: 'square-small',
     imageType: 'small',
     objectPosition: '50% 0'
-  },
-  {
-    src: 'heidi_hoelting_sitting_on_rock',
-    size: 'square',
-    imageType: 'small',
-    objectPosition: '50% 30%'
-  },
-  {
-    src: 'heidi_hoelting_standing_chic_purse',
-    size: 'tall',
-    imageType: 'small'
   },
   {
     src: 'heidi_hoelting_red_dress',
@@ -216,6 +205,12 @@ const galleryArray = [
     src: 'heidi_hoelting_cuba_one_arm_up',
     size: 'wide',
     imageType: 'large'
+  },
+  {
+    src: 'heidi_hoelting_green_rocks_beach',
+    size: 'square',
+    imageType: 'large',
+    objectPosition: 'center center'
   },
   {
     src: 'heidi_hoelting_one_piece_1',
