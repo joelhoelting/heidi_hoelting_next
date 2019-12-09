@@ -204,7 +204,6 @@ class Contact extends Component {
           });
 
           if (status === 200) {
-            console.log('form successfully submitted', res);
             setTimeout(() => {
               this.setState({ showLoadScreen: false, submitted: true });
             }, 500);
@@ -213,7 +212,6 @@ class Contact extends Component {
               this.setState({ animateSubmitted: true });
             }, 800);
           } else {
-            console.log('form failed to send', res);
             setTimeout(() => {
               this.setState({ showLoadScreen: false, formSubmitError: true, formSubmitErrorMsg: statusText });
             }, 500);

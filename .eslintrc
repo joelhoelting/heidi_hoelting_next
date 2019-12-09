@@ -12,6 +12,7 @@
   },
   "plugins": ["prettier", "jsx-a11y"],
   "rules": {
+    "react/no-danger": 1,
     "react/jsx-filename-extension": [
       1,
       {

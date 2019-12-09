@@ -110,6 +110,8 @@ class ResponsiveSlider extends Component {
       }
     };
 
+    /* eslint-disable */
+
     // Scroll to clicked slide
     if (this.props.currentIndex !== this.state.currentIndex) {
       this.slider.slickGoTo(this.props.currentIndex, true);
@@ -118,6 +120,8 @@ class ResponsiveSlider extends Component {
         currentIndex: this.props.currentIndex
       });
     }
+
+    /* eslint-enable */
 
     return (
       <SliderWrapper>
