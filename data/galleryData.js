@@ -4,37 +4,44 @@
 
 const galleryArray = [
   {
+    alt: 'Beach With Balloon',
     src: 'heidi_hoelting_beach_with_balloon',
     size: 'tall',
     imageType: 'large',
     objectPosition: '42% 50%'
   },
   {
+    alt: 'Central Park Sun Drenched',
     src: 'heidi_hoelting_central_park_sun_drenched',
     size: 'tall',
     imageType: 'small'
   },
   {
+    alt: 'Diving Board Drink Glasses',
     src: 'heidi_hoelting_diving_board_drink_glasses',
     size: 'square-small',
     imageType: 'large'
   },
   {
+    alt: 'Full Body Statue',
     src: 'heidi_hoelting_full_body_statue',
     size: 'wide',
     imageType: 'large'
   },
   {
-    src: 'heidi_hoelting_standing_chic_purse',
+    alt: 'Central Park Chic Purse',
+    src: 'heidi_hoelting_central_park_chic_purse',
     size: 'tall',
     imageType: 'small'
   },
   {
+    alt: 'Happy Jump Beach',
     src: 'heidi_hoelting_happy_jump_beach',
     size: 'wide',
     imageType: 'large'
   },
   {
+    alt: 'Back of House White Outfit',
     src: 'heidi_hoelting_back_of_house_white_outfit',
     size: 'square',
     imageType: 'large',

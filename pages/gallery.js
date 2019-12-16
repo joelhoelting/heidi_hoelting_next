@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 import Context from '../config/Context';
 import ResponsiveSlider from '../components/slick/ResponsiveSlider';
-import ResponsiveImage from '../components/images/ResponsiveImage';
+import ResponsiveImage from '../components/images/GalleryResponsiveImage';
 import { mediaMin } from '../styles/mediaQueries';
 
-import galleryArray from '../data/galleryData';
+import parseFetchedGalleryImages from '../helpers/parsedFetchedGalleryImages';
+import localGalleryArray from '../data/galleryData';
 
 const GalleryGridWrapper = styled.div`
   padding-bottom: 50px;
@@ -155,11 +156,24 @@ class Gallery extends React.Component {
         active: false,
         currentIndex: undefined
       },
+      galleryArray: [],
       mounted: false
     };
   }
 
   componentDidMount() {
+    fetch('https://cms.heidihoelting.com/wp-json/wp/v2/gallery_images') // Call the fetch function passing the url of the API as a parameter
+      .then(res => res.json())
+      .then(cmsData => {
+        const galleryArray = parseFetchedGalleryImages(cmsData, true);
+
+        this.setState({ galleryArray });
+      })
+      .catch(() => {
+        const galleryArray = parseFetchedGalleryImages(localGalleryArray);
+        this.setState({ galleryArray });
+      });
+
     setTimeout(() => {
       this.setState({ mounted: true });
     }, 500);
@@ -187,24 +201,18 @@ class Gallery extends React.Component {
     this.setState({ carousel: newState });
   }
 
-  renderGallery(context) {
+  renderGallery(context, galleryArray) {
     const { mounted } = this.state;
 
     return galleryArray.map((item, idx) => {
-      const { imageType, src, size, objectPosition } = item;
+      const { imageType, objectPosition, size, sizes } = item;
 
       const animationClass = `reveal-${idx % 3}`;
 
       return (
         // eslint-disable-next-line
         <GridItem key={`gallery-item-${idx}`} className={`${size} ${mounted ? animationClass : ''}`} mounted={mounted}>
-          <ResponsiveImage
-            imageType={imageType}
-            src={`/static/images/pages/gallery/${src}`}
-            objectFit
-            objectPosition={objectPosition}
-            width="100%"
-          />
+          <ResponsiveImage imageType={imageType} sizes={sizes} objectFit objectPosition={objectPosition} width="100%" />
           <div className="picture-overlay" aria-hidden="true" onClick={e => this.toggleOverlay(e, context, idx)} />
         </GridItem>
       );
@@ -212,8 +220,9 @@ class Gallery extends React.Component {
   }
 
   render() {
-    const { carousel } = this.state;
+    const { carousel, galleryArray } = this.state;
     const { active, currentIndex } = carousel;
+
     return (
       <Context.Consumer>
         {context => (
@@ -225,7 +234,7 @@ class Gallery extends React.Component {
                   <img aria-hidden="true" alt="Close overlay icon" src="/static/images/icons/close.svg" />
                 </div>
               </div>
-              {this.renderGallery(context)}
+              {this.renderGallery(context, galleryArray)}
             </GalleryGridWrapper>
             <LegalDisclaimer>All images © 2019 Heidi Hölting. All Rights Reserved.</LegalDisclaimer>
           </React.Fragment>

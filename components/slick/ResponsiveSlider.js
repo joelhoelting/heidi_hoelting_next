@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import styled from 'styled-components';
 
 import { mediaMin } from '../../styles/mediaQueries';
-import ResponsiveImage from '../images/ResponsiveImage';
+import ResponsiveImage from '../images/GalleryResponsiveImage';
 
 const SliderArrowWrapper = styled.div`
   z-index: 10;
@@ -79,14 +79,14 @@ class ResponsiveSlider extends Component {
   createSlides() {
     const { imgArray } = this.props;
     return imgArray.map(img => {
-      const { imageType, src } = img;
+      const { imageType, sizes } = img;
       return (
         <ResponsiveImage
           className="carousel-image"
           centered
           key={`carousel-image-${img.order}`}
           imageType={imageType}
-          src={`/static/images/pages/gallery/${src}`}
+          sizes={sizes}
         />
       );
     });
