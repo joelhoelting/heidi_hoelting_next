@@ -209,14 +209,21 @@ class Gallery extends React.Component {
     const { mounted } = this.state;
 
     return galleryArray.map((item, idx) => {
-      const { imageType, objectPosition, size, sizes } = item;
+      const { alt, imageType, objectPosition, size, sizes } = item;
 
       const animationClass = `reveal-${idx % 3}`;
 
       return (
         // eslint-disable-next-line
         <GridItem key={`gallery-item-${idx}`} className={`${size} ${mounted ? animationClass : ''}`} mounted={mounted}>
-          <ResponsiveImage imageType={imageType} sizes={sizes} objectFit objectPosition={objectPosition} width="100%" />
+          <ResponsiveImage
+            alt={alt}
+            imageType={imageType}
+            sizes={sizes}
+            objectFit
+            objectPosition={objectPosition}
+            width="100%"
+          />
           <div className="picture-overlay" aria-hidden="true" onClick={e => this.toggleOverlay(e, context, idx)} />
         </GridItem>
       );

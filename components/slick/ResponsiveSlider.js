@@ -79,9 +79,10 @@ class ResponsiveSlider extends Component {
   createSlides() {
     const { imgArray } = this.props;
     return imgArray.map(img => {
-      const { imageType, sizes } = img;
+      const { alt, imageType, sizes } = img;
       return (
         <ResponsiveImage
+          alt={alt}
           className="carousel-image"
           centered
           key={`carousel-image-${img.order}`}

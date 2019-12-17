@@ -24,6 +24,7 @@ const parseFetchedGalleryImages = (galleryImages, fetchedFromCMS = false) => {
         image_type,
         object_position,
         image: {
+          alt,
           filename,
           sizes: {
             width_400,
@@ -67,13 +68,14 @@ const parseFetchedGalleryImages = (galleryImages, fetchedFromCMS = false) => {
       }
 
       return {
+        alt,
         imageType: image_type,
         objectPosition: object_position || '50% 50%',
         size,
         sizes: sizeObj
       };
     } else {
-      const { src, size, imageType, objectPosition } = image;
+      const { alt, src, size, imageType, objectPosition } = image;
 
       if (imageType === 'large') {
         sizeObj = {
@@ -102,6 +104,7 @@ const parseFetchedGalleryImages = (galleryImages, fetchedFromCMS = false) => {
       }
 
       return {
+        alt,
         imageType,
         objectPosition: objectPosition || '50% 50%',
         size,
