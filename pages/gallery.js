@@ -162,21 +162,25 @@ class Gallery extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://cms.heidihoelting.com/wp-json/wp/v2/gallery_images') // Call the fetch function passing the url of the API as a parameter
+    fetch('https://cms.heidihoelting.com/wp-json/wp/v2/gallery_images/?per_page=100')
       .then(res => res.json())
       .then(cmsData => {
         const galleryArray = parseFetchedGalleryImages(cmsData, true);
 
         this.setState({ galleryArray });
+
+        setTimeout(() => {
+          this.setState({ mounted: true });
+        }, 500);
       })
       .catch(() => {
         const galleryArray = parseFetchedGalleryImages(localGalleryArray);
         this.setState({ galleryArray });
-      });
 
-    setTimeout(() => {
-      this.setState({ mounted: true });
-    }, 500);
+        setTimeout(() => {
+          this.setState({ mounted: true });
+        }, 500);
+      });
   }
 
   toggleOverlay(event = undefined, context, index = undefined) {
@@ -220,7 +224,7 @@ class Gallery extends React.Component {
   }
 
   render() {
-    const { carousel, galleryArray } = this.state;
+    const { carousel, galleryArray, mounted } = this.state;
     const { active, currentIndex } = carousel;
 
     return (
@@ -236,7 +240,7 @@ class Gallery extends React.Component {
               </div>
               {this.renderGallery(context, galleryArray)}
             </GalleryGridWrapper>
-            <LegalDisclaimer>All images © 2019 Heidi Hölting. All Rights Reserved.</LegalDisclaimer>
+            {mounted && <LegalDisclaimer>All images © 2019 Heidi Hölting. All Rights Reserved.</LegalDisclaimer>}
           </React.Fragment>
         )}
       </Context.Consumer>
