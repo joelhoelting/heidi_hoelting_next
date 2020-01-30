@@ -5,7 +5,7 @@ import ResponsiveSlider from '../components/slick/ResponsiveSlider';
 import ResponsiveImage from '../components/images/GalleryResponsiveImage';
 import { mediaMin } from '../styles/mediaQueries';
 
-import parseFetchedGalleryImages from '../helpers/parsedFetchedGalleryImages';
+import parseGalleryImages from '../helpers/parseGalleryImages';
 import localGalleryArray from '../data/galleryData';
 
 const GalleryGridWrapper = styled.div`
@@ -165,7 +165,7 @@ class Gallery extends React.Component {
     fetch('https://cms.heidihoelting.com/wp-json/wp/v2/gallery_images/?per_page=100')
       .then(res => res.json())
       .then(cmsData => {
-        const galleryArray = parseFetchedGalleryImages(cmsData, true);
+        const galleryArray = parseGalleryImages(cmsData, true);
 
         this.setState({ galleryArray });
 
@@ -174,7 +174,7 @@ class Gallery extends React.Component {
         }, 500);
       })
       .catch(() => {
-        const galleryArray = parseFetchedGalleryImages(localGalleryArray);
+        const galleryArray = parseGalleryImages(localGalleryArray);
         this.setState({ galleryArray });
 
         setTimeout(() => {

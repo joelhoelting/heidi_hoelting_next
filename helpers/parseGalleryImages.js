@@ -14,7 +14,7 @@ const appendStringToFilename = (filename, str) => {
   return '/static/images/pages/gallery/' + filename + str;
 };
 
-const parseFetchedGalleryImages = (galleryImages, fetchedFromCMS = false) => {
+const parseGalleryImages = (galleryImages, fetchedFromCMS = false) => {
   let parsedGalleryImages = galleryImages.map(image => {
     let sizeObj;
 
@@ -116,4 +116,4 @@ const parseFetchedGalleryImages = (galleryImages, fetchedFromCMS = false) => {
   return parsedGalleryImages;
 };
 
-export default parseFetchedGalleryImages;
+export default parseGalleryImages;

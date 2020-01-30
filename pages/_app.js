@@ -21,17 +21,15 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <Container>
-        <ContextProvider {...this.props}>
-          <ContainerStyle />
-          <TypographyStyle />
-          <GlobalStyle />
-          <AnimationStyle />
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ContextProvider>
-      </Container>
+      <ContextProvider {...this.props}>
+        <ContainerStyle />
+        <TypographyStyle />
+        <GlobalStyle />
+        <AnimationStyle />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ContextProvider>
     );
   }
 }

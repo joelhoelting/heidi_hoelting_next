@@ -189,7 +189,7 @@ class Contact extends Component {
         message: `Heidi, you have a new email from: ${email}\n\n${textarea}`
       };
 
-      fetch('https://api.joelhoelting.com/email/send', {
+      fetch('https://api.joelhoelting.com/email/aws/send-ses-email', {
         method: 'POST',
         body: JSON.stringify(emailBody), // data can be `string` or {object}!
         headers: {
