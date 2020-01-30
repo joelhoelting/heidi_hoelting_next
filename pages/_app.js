@@ -1,4 +1,4 @@
-import App, { Container } from 'next/app';
+import App from 'next/app';
 import Router from 'next/router';
 
 import 'slick-carousel/slick/slick.css';
