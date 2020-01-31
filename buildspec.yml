@@ -44,8 +44,8 @@ phases:
             echo Cloudfront ID - $CF_DIST_ID
             aws cloudfront create-invalidation --distribution-id $CF_DIST_ID --paths /*
           fi
-          echo "Build/Deploy success on branch ${BRANCH_NAME} on $(date)"
-          aws sns publish --phone-number ${PHONE_NUMBER} --message "Build/deploy success. ${BUCKET_NAME}; ${BRANCH_NAME} branch; on $(date)"
+          echo "Build/Deploy success on branch ${BRANCH_NAME} on $(TZ=":US/Eastern" date)"
+          aws sns publish --phone-number ${PHONE_NUMBER} --message "AWS CodeBuild success. ${BUCKET_NAME}; ${BRANCH_NAME} branch; on $(TZ=":US/Eastern" date)"
         else
           echo "Build/Deploy failure"
         fi

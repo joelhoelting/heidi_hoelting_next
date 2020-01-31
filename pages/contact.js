@@ -183,13 +183,14 @@ class Contact extends Component {
       const { email, name, textarea } = this.state;
 
       const emailBody = {
-        to: 'heidi.hoelting@web.de',
+        // to: 'heidi.hoelting@web.de',
+        to: 'joelhoelting@protonmail.com',
         subject: `HeidiHoelting.com: ${name}`,
         from: 'HeidiHoelting.com',
         message: `Heidi, you have a new email from: ${email}\n\n${textarea}`
       };
 
-      fetch('https://api.joelhoelting.com/email/send', {
+      fetch('https://api.joelhoelting.com/aws/email/send-ses-email', {
         method: 'POST',
         body: JSON.stringify(emailBody), // data can be `string` or {object}!
         headers: {

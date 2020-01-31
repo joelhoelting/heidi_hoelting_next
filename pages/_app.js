@@ -1,4 +1,4 @@
-import App, { Container } from 'next/app';
+import App from 'next/app';
 import Router from 'next/router';
 
 import 'slick-carousel/slick/slick.css';
@@ -21,17 +21,15 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <Container>
-        <ContextProvider {...this.props}>
-          <ContainerStyle />
-          <TypographyStyle />
-          <GlobalStyle />
-          <AnimationStyle />
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ContextProvider>
-      </Container>
+      <ContextProvider {...this.props}>
+        <ContainerStyle />
+        <TypographyStyle />
+        <GlobalStyle />
+        <AnimationStyle />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ContextProvider>
     );
   }
 }
