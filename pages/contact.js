@@ -184,9 +184,13 @@ class Contact extends Component {
 
       const emailBody = {
         to: 'heidi.hoelting@web.de',
-        subject: `HeidiHoelting.com: ${name}`,
-        from: 'HeidiHoelting.com',
-        message: `Heidi, you have a new email from: ${email}\n\n${textarea}`
+        subject: `heidihoelting.com: ${name}`,
+        from: 'heidihoelting.com',
+        message: `
+          Heidi, you have a new message from heidihoelting.com: \n\n
+          From: ${email}\n
+          Message: ${textarea}
+        `
       };
 
       fetch('https://api.joelhoelting.com/aws/email/send-ses-email', {
