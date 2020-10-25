@@ -162,9 +162,10 @@ class Gallery extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://brokencmsurl.com/wp-json/wp/v2/gallery_images/?per_page=100')
+    fetch('https://cms.heidihoelting.com/wp-json/wp/v2/gallery_images/?per_page=100')
       .then(res => res.json())
       .then(cmsData => {
+        console.log('successfully fetched gallery data');
         const galleryArray = parseGalleryImages(cmsData, true);
 
         this.setState({ galleryArray });
@@ -174,6 +175,7 @@ class Gallery extends React.Component {
         }, 500);
       })
       .catch(() => {
+        console.log('failed to fetch gallery data, using local data');
         const galleryArray = parseGalleryImages(localGalleryArray);
         this.setState({ galleryArray });
 
