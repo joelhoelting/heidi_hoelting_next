@@ -162,7 +162,7 @@ class Gallery extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://cms.heidihoelting.com/wp-json/wp/v2/gallery_images/?per_page=100')
+    fetch('https://brokencmsurl.com/wp-json/wp/v2/gallery_images/?per_page=100')
       .then(res => res.json())
       .then(cmsData => {
         const galleryArray = parseGalleryImages(cmsData, true);
