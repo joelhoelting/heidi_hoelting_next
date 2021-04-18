@@ -249,7 +249,7 @@ class Gallery extends React.Component {
               </div>
               {this.renderGallery(context, galleryArray)}
             </GalleryGridWrapper>
-            {mounted && <LegalDisclaimer>All images © 2019 Heidi Hölting. All Rights Reserved.</LegalDisclaimer>}
+            {mounted && <LegalDisclaimer>All images © 2021 Heidi Hölting. All Rights Reserved.</LegalDisclaimer>}
           </React.Fragment>
         )}
       </Context.Consumer>
