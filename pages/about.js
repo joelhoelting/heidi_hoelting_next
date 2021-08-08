@@ -91,8 +91,8 @@ class About extends Component {
         <section>
           <h1>Heidi Hölting</h1>
           <p>
-            Heidi Hölting is a highly experienced professional fashion and fit model based in New York City. She works
-            for international clients including Tommy Hilfiger, Roberto Cavalli, Gap Inc., Calvin Klein, Monique
+            Heidi is a highly experienced professional fashion and fit model based in New York City. She works for
+            international clients including Tommy Hilfiger, Roberto Cavalli, Adidas, Gap Inc., Calvin Klein, Monique
             Lhuillier, Jessica Simpson Swimwear, Club Monaco, Sofía Vergara, Juicy Couture and many more.
           </p>
         </section>
