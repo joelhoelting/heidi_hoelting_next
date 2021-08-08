@@ -326,7 +326,12 @@ class Contact extends Component {
     return (
       <ContactWrapper errors={errors} mounted={mounted} animateSubmitted={animateSubmitted}>
         {this.renderForm()}
-        <a id="instagram-link" href="https://www.instagram.com/heidi_c_nyc/" target="_blank" rel="noopener noreferrer">
+        <a
+          id="instagram-link"
+          href="https://www.instagram.com/heidi_c_golding/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img src="/static/images/logos/instagram_black.svg" alt="instagram_logo" />
         </a>
       </ContactWrapper>
